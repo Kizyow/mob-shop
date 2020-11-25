@@ -1,0 +1,32 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                    INVENTAIRE ACHAT                  | #
+# +------------------------------------------------------+ #
+############################################################
+
+# L'inventaire qui correspond à l'achat
+butchery-and-shop:
+  title: "Shop"
+  size: 27
+  items:
+    template:
+      material: STONE
+      action: "none"
+      slot: 0
+      title: "Default item"
+      lore:
+        - "This is a"
+        - "simple description"
+
+# Balises disponible :
+# - <entity_name_shop>
+# - <entity_price_shop>
+# - <entity_head_shop>
+# - <entity_type>
+# - <player_name>
+
+# Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
+# - none (Ne rien faire, tu peux effacer la ligne action)
+# - previous_page (Reculer d'une page)
+# - next_page (Avancer d'une page)
+# - close (Fermer l'inventaire)

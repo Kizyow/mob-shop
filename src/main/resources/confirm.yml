@@ -1,0 +1,32 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                INVENTAIRE CONFIRMATION               | #
+# +------------------------------------------------------+ #
+############################################################
+
+# L'inventaire qui correspond à la confirmation
+butchery-and-shop:
+  title: "Confirm?"
+  size: 27
+  items:
+    template:
+      material: STONE
+      action: "none"
+      slot: 0
+      title: "Default item"
+      lore:
+        - "This is a"
+        - "simple description"
+
+# Balises disponible :
+# - <entity_name_shop>
+# - <entity_price_shop>
+# - <entity_head_shop>
+# - <entity_type>
+# - <player_name>
+
+# Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
+# - none (Ne rien faire, tu peux effacer la ligne action)
+# - confirm (Accepter)
+# - refuse (Refuser)
+# - close (Fermer l'inventaire)

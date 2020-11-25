@@ -2,3 +2,9 @@ name: MobShop
 author: Kizyow
 main: fr.kizyow.mobshop.Plugin
 version: 1.0
+api-version: 1.13
+depend:
+  - Jobs
+  - Lands
+  - HeadDatabase
+  - Vault

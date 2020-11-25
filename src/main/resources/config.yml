@@ -1,0 +1,49 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                          SHOP                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Les entités qui peuvent être vendus aux autres joueurs
+entity-sell-shop:
+  - PIG
+
+# Le nom correspondant à chaque entité
+entity-name-shop:
+  pig: "Cochon"
+
+# La tête correspondant à chaque entité
+entity-head-shop:
+  pig: hdb-14201
+
+# Le prix de chaque entité
+entity-price-shop:
+  pig: 5
+
+# La variation du prix (en %)
+price-variation-shop: 0
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       BOUCHERIE                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Les entités qui peuvent être vendus à la boucherie
+entity-sell-butcher:
+  - PIG
+
+# Le nom correspondant à chaque entité
+entity-name-butcher:
+  pig: "Cochon"
+
+# La tête correspondant à chaque entité
+entity-head-butcher:
+  pig: hdb-26071
+
+# Le prix de chaque entité
+entity-price-butcher:
+  pig: 5
+
+# La variation du prix (en %)
+price-variation-butcher: 0

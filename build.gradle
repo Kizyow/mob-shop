@@ -1,14 +1,30 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'java'
 }
+
+compileJava.options.encoding='UTF-8'
 
 group 'fr.kizyow'
 version '1.0'
 
 repositories {
+    maven { url = "https://mvn.intellectualsites.com/content/repositories/thirdparty/" }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url "https://maven.enginehub.org/repo/" }
+    maven { url 'https://jitpack.io' }
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly 'org.spigotmc:spigot:1.16.3-R0.1-SNAPSHOT'
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4'
+    compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.2.0'
+    compileOnly 'com.github.angeschossen:LandsAPI:4.11.8'
+    compileOnly 'com.github.Zrips:Jobs:4.16.3'
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'me.arcaniax:HeadDatabase-API:1.0.0'
+    implementation 'fr.minuskube.inv:smart-invs:1.2.7'
 }

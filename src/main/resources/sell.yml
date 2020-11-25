@@ -1,0 +1,49 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     INVENTAIRE VENTE                 | #
+# +------------------------------------------------------+ #
+############################################################
+
+# L'inventaire qui correspond à la vente en boucherie ET au shop
+butchery-and-shop:
+  title: "Sell"
+  size: 27
+  items:
+    template:
+      material: STONE
+      action: "none"
+      slot: 0
+      title: "Default item"
+      lore:
+        - "This is a"
+        - "simple description"
+
+# L'inventaire qui correspond à la vente UNIQUEMENT au shop
+shop-only:
+  title: "Sell"
+  size: 27
+  items:
+    template:
+      material: STONE
+      action: "none"
+      slot: 0
+      title: "Default item"
+      lore:
+        - "This is a"
+        - "simple description"
+
+# Balises disponible :
+# - <entity_name_shop>
+# - <entity_price_shop>
+# - <entity_head_shop>
+# - <entity_name_butcher>
+# - <entity_price_butcher>
+# - <entity_head_butcher>
+# - <entity_type>
+# - <player_name>
+
+# Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
+# - none (Ne rien faire, tu peux effacer la ligne action)
+# - sell_butcher (Vendre à la boucherie)
+# - sell_shop (Vendre au shop)
+# - close (Fermer l'inventaire)

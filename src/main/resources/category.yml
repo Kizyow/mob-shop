@@ -1,0 +1,31 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                   INVENTAIRE CATÉGORIE               | #
+# +------------------------------------------------------+ #
+############################################################
+
+# L'inventaire qui correspond à la catégorie
+category:
+  title: "Category"
+  size: 27
+  items:
+    template:
+      material: STONE
+      action: "none"
+      slot: 0
+      title: "Default item"
+      lore:
+        - "This is a"
+        - "simple description"
+
+# Balises disponible :
+# - <entity_name_shop>
+# - <entity_price_shop>
+# - <entity_head_shop>
+# - <entity_type>
+# - <player_name>
+# - <offres>
+
+# Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
+# - none (Ne rien faire, tu peux effacer la ligne action)
+# - close (Fermer l'inventaire)
