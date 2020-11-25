@@ -55,4 +55,8 @@ public class ItemData {
         return ItemConverter.getItem(stringMaterial, title, lore, entityType);
     }
 
+    public ItemStack getItem(){
+        return ItemConverter.getItem(stringMaterial, title, lore, null);
+    }
+
 }

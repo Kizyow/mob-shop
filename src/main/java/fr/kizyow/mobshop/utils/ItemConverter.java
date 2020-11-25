@@ -40,6 +40,20 @@ public class ItemConverter {
 
     }
 
+    public static void replaceShopTag(ItemStack itemStack, String author, double price){
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        List<String> loreMeta = itemMeta.getLore().stream()
+                .map(l -> l.replace("<author>", author))
+                .map(l -> l.replace("<entity_price_shop>", String.valueOf(price)))
+                .collect(Collectors.toList());
+        itemMeta.setLore(loreMeta);
+
+        itemStack.setItemMeta(itemMeta);
+
+    }
+
     private static void customMeta(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
 
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -70,6 +84,7 @@ public class ItemConverter {
             string = string.replace("<entity_head_butcher>", entityHeadButcher);
         }
 
+        System.out.println(entityNameShop);
         string = string.replace("<entity_name_shop>", entityNameShop);
         string = string.replace("<entity_head_shop>", entityHeadShop);
         string = string.replace("<entity_type>", entityType.name());

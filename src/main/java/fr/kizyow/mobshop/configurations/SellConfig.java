@@ -35,7 +35,7 @@ public class SellConfig extends AbstractConfig {
 
         }
 
-        return new InventoryData(inventoryTitle, inventorySize, itemDataList);
+        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList);
 
     }
 
@@ -60,7 +60,7 @@ public class SellConfig extends AbstractConfig {
 
         }
 
-        return new InventoryData(inventoryTitle, inventorySize, itemDataList);
+        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList);
 
     }
 

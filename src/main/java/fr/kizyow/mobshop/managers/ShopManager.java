@@ -6,8 +6,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -62,6 +65,21 @@ public class ShopManager {
         player.sendMessage(ChatColor.WHITE + "Ton animal a été mis en vente à la boutique, tu recevras " +
                 ChatColor.GREEN + price + "$" + ChatColor.RESET + " quand un joueur aura acheté ton animal.");
         entity.remove();
+    }
+
+    public Map<Integer, MobData> getMobDataMap(){
+        return mobDataMap;
+    }
+
+    public void buyItem(ItemStack itemStack, EntityType entityType, Player player){
+
+        List<String> lore = itemStack.getItemMeta().getLore();
+        String idRaw = lore.get(lore.size() - 1);
+        Integer id = Integer.valueOf(idRaw.split(" ")[1]);
+
+        player.sendMessage("id:" + id);
+
+
     }
 
 }

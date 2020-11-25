@@ -1,7 +1,9 @@
 package fr.kizyow.mobshop;
 
+import fr.kizyow.mobshop.commands.MobShopCommand;
 import fr.kizyow.mobshop.configurations.MobShopConfig;
 import fr.kizyow.mobshop.configurations.SellConfig;
+import fr.kizyow.mobshop.configurations.ShopConfig;
 import fr.kizyow.mobshop.listeners.MobInteractListener;
 import fr.kizyow.mobshop.managers.ShopManager;
 import fr.minuskube.inv.InventoryManager;
@@ -17,6 +19,7 @@ public class Plugin extends JavaPlugin {
 
     private final MobShopConfig mobShopConfig = new MobShopConfig(this);
     private final SellConfig sellConfig = new SellConfig(this);
+    private final ShopConfig shopConfig = new ShopConfig(this);
 
     private ShopManager shopManager;
     private InventoryManager inventoryManager;
@@ -38,6 +41,9 @@ public class Plugin extends JavaPlugin {
 
         MobInteractListener mobInteractListener = new MobInteractListener(this);
         Bukkit.getPluginManager().registerEvents(mobInteractListener, this);
+
+        MobShopCommand mobShopCommand = new MobShopCommand(this);
+        getCommand("mobshop").setExecutor(mobShopCommand);
 
     }
 
@@ -70,6 +76,10 @@ public class Plugin extends JavaPlugin {
 
     public SellConfig getSellConfig(){
         return sellConfig;
+    }
+
+    public ShopConfig getShopConfig(){
+        return shopConfig;
     }
 
     public ShopManager getShopManager(){

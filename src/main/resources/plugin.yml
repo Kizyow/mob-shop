@@ -8,3 +8,6 @@ depend:
   - Lands
   - HeadDatabase
   - Vault
+commands:
+  mobshop:
+    description: "The main command of MobShop"

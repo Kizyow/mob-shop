@@ -6,11 +6,13 @@ public class InventoryData {
 
     private final String title;
     private final Integer size;
+    private final SettingData settingData;
     private final List<ItemData> itemData;
 
-    public InventoryData(String title, Integer size, List<ItemData> itemData) {
+    public InventoryData(String title, Integer size, SettingData settingData, List<ItemData> itemData) {
         this.title = title;
         this.size = size;
+        this.settingData = settingData;
         this.itemData = itemData;
     }
 
@@ -28,6 +30,10 @@ public class InventoryData {
 
     public Integer getColumn(){
         return 9;
+    }
+
+    public SettingData getSettingData(){
+        return settingData;
     }
 
     public List<ItemData> getItems(){

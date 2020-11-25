@@ -23,7 +23,6 @@ butchery-and-shop:
 # - <entity_price_shop>
 # - <entity_head_shop>
 # - <entity_type>
-# - <player_name>
 
 # Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
 # - none (Ne rien faire, tu peux effacer la ligne action)

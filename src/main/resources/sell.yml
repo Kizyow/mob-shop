@@ -40,7 +40,6 @@ shop-only:
 # - <entity_price_butcher>
 # - <entity_head_butcher>
 # - <entity_type>
-# - <player_name>
 
 # Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
 # - none (Ne rien faire, tu peux effacer la ligne action)
