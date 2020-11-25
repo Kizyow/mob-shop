@@ -30,7 +30,7 @@ public class InventoryData {
         return 9;
     }
 
-    public List<ItemData> getItemData(){
+    public List<ItemData> getItems(){
         return itemData;
     }
 

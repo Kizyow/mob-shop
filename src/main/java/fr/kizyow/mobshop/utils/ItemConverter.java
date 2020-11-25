@@ -20,15 +20,61 @@ public class ItemConverter {
             itemStack = new ItemStack(material);
         }
 
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', title));
-        List<String> loreColored = lore.stream()
-                .map(l -> ChatColor.translateAlternateColorCodes('&', l))
-                .collect(Collectors.toList());
-        itemMeta.setLore(loreColored);
-        itemStack.setItemMeta(itemMeta);
+        customMeta(itemStack, title, lore, entityType);
 
         return itemStack;
+
+    }
+
+    public static void replacePriceTag(ItemStack itemStack, double price){
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        List<String> loreMeta = itemMeta.getLore().stream()
+                .map(l -> l.replace("<entity_price_butcher>", String.valueOf(price)))
+                .map(l -> l.replace("<entity_price_shop>", String.valueOf(price)))
+                .collect(Collectors.toList());
+        itemMeta.setLore(loreMeta);
+
+        itemStack.setItemMeta(itemMeta);
+
+    }
+
+    private static void customMeta(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        String titleMeta = ChatColor.translateAlternateColorCodes('&', title);
+        titleMeta = replaceTag(titleMeta, entityType);
+        itemMeta.setDisplayName(titleMeta);
+
+        List<String> loreMeta = lore.stream()
+                .map(l -> ChatColor.translateAlternateColorCodes('&', l))
+                .map(l -> replaceTag(l, entityType))
+                .collect(Collectors.toList());
+        itemMeta.setLore(loreMeta);
+
+        itemStack.setItemMeta(itemMeta);
+
+    }
+
+    private static String replaceTag(String string, EntityType entityType){
+
+        String entityNameShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesName().get(entityType);
+        String entityHeadShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
+        String entityNameButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesName().get(entityType);
+        String entityHeadButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesHead().get(entityType);
+
+        if(entityNameButcher != null && entityHeadButcher != null){
+            string = string.replace("<entity_name_butcher>", entityNameButcher);
+            string = string.replace("<entity_head_butcher>", entityHeadButcher);
+        }
+
+        string = string.replace("<entity_name_shop>", entityNameShop);
+        string = string.replace("<entity_head_shop>", entityHeadShop);
+        string = string.replace("<entity_type>", entityType.name());
+
+        return string;
 
     }
 
@@ -46,7 +92,7 @@ public class ItemConverter {
             return null;
         }
 
-        String id = material.substring(4);
+        String id = data.substring(4);
         ItemStack itemStack = Plugin.getInstance().getHeadDatabaseAPI().getItemHead(id);
 
         if(itemStack == null){

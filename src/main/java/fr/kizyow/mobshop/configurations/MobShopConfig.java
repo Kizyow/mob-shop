@@ -54,14 +54,15 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, Integer> getShopEntitiesPrices(){
+    public Map<EntityType, Double> getShopEntitiesPrices(){
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-price-shop");
-        Map<EntityType, Integer> outMap = new HashMap<>();
+        Map<EntityType, Double> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
         for(Map.Entry<String, Object> entry : values.entrySet()){
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
-            Integer price = (Integer) entry.getValue();
+            String stringPrice = String.valueOf(entry.getValue());
+            Double price = Double.parseDouble(stringPrice);
             outMap.put(entityType, price);
 
         }
@@ -108,14 +109,15 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, Integer> getButcherEntitiesPrices(){
+    public Map<EntityType, Double> getButcherEntitiesPrices(){
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-price-butcher");
-        Map<EntityType, Integer> outMap = new HashMap<>();
+        Map<EntityType, Double> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
         for(Map.Entry<String, Object> entry : values.entrySet()){
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
-            Integer price = (Integer) entry.getValue();
+            String stringPrice = String.valueOf(entry.getValue());
+            Double price = Double.parseDouble(stringPrice);
             outMap.put(entityType, price);
 
         }

@@ -3,6 +3,7 @@ package fr.kizyow.mobshop;
 import fr.kizyow.mobshop.configurations.MobShopConfig;
 import fr.kizyow.mobshop.configurations.SellConfig;
 import fr.kizyow.mobshop.listeners.MobInteractListener;
+import fr.kizyow.mobshop.managers.ShopManager;
 import fr.minuskube.inv.InventoryManager;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import net.milkbowl.vault.economy.Economy;
@@ -17,6 +18,7 @@ public class Plugin extends JavaPlugin {
     private final MobShopConfig mobShopConfig = new MobShopConfig(this);
     private final SellConfig sellConfig = new SellConfig(this);
 
+    private ShopManager shopManager;
     private InventoryManager inventoryManager;
     private HeadDatabaseAPI headDatabaseAPI;
     private Economy economy;
@@ -24,6 +26,8 @@ public class Plugin extends JavaPlugin {
     @Override
     public void onEnable(){
         instance = this;
+
+        this.shopManager = new ShopManager(this);
 
         this.inventoryManager = new InventoryManager(this);
         inventoryManager.init();
@@ -66,6 +70,10 @@ public class Plugin extends JavaPlugin {
 
     public SellConfig getSellConfig(){
         return sellConfig;
+    }
+
+    public ShopManager getShopManager(){
+        return shopManager;
     }
 
     public InventoryManager getInventoryManager(){

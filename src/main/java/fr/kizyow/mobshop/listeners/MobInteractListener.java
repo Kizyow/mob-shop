@@ -2,6 +2,7 @@ package fr.kizyow.mobshop.listeners;
 
 import com.gamingmesh.jobs.Jobs;
 import fr.kizyow.mobshop.Plugin;
+import fr.kizyow.mobshop.inventories.SellInventory;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -45,8 +46,9 @@ public class MobInteractListener implements Listener {
 
             if(isPlayerFarmer && isPlayerClaimOwn){
 
-                event.setDamage(0);
-                player.sendMessage("Vente");
+                event.setCancelled(true);
+                SellInventory sellInventory = new SellInventory(plugin, mob);
+                sellInventory.getInventory().open(player);
 
             }
 
