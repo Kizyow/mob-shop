@@ -20,6 +20,7 @@ public class Plugin extends JavaPlugin {
     private final ShopConfig shopConfig = new ShopConfig(this);
     private final ConfirmConfig confirmConfig = new ConfirmConfig(this);
     private final CategoryConfig categoryConfig = new CategoryConfig(this);
+    private final MessageConfig messageConfig = new MessageConfig(this);
 
     private ShopManager shopManager;
     private InventoryManager inventoryManager;
@@ -87,6 +88,10 @@ public class Plugin extends JavaPlugin {
 
     public CategoryConfig getCategoryConfig(){
         return categoryConfig;
+    }
+
+    public MessageConfig getMessageConfig(){
+        return messageConfig;
     }
 
     public ShopManager getShopManager(){

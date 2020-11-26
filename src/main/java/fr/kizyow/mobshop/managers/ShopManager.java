@@ -4,6 +4,7 @@ import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.MobData;
 import fr.kizyow.mobshop.inventories.ConfirmInventory;
 import fr.kizyow.mobshop.inventories.ShopInventory;
+import fr.kizyow.mobshop.utils.MessageConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -58,15 +59,18 @@ public class ShopManager {
 
     public void sellMobButcher(Entity entity, double price, Player player){
         plugin.getEconomy().depositPlayer(player, price);
-        player.sendMessage(ChatColor.WHITE + "Tu as vendu ton animal à la boucherie, tu as reçu " + ChatColor.GREEN + price + "$");
+        String message = plugin.getMessageConfig().getMobSoldButcher();
+        message = MessageConverter.convert(message, entity.getType(), price, player);
+        player.sendMessage(message);
         entity.remove();
     }
 
     public void sellMobShop(Entity entity, double price, Player player){
         MobData mobData = new MobData(entity.getType(), player.getUniqueId(), price);
         mobDataMap.put(mobId++, mobData);
-        player.sendMessage(ChatColor.WHITE + "Ton animal a été mis en vente à la boutique, tu recevras " +
-                ChatColor.GREEN + price + "$" + ChatColor.RESET + " quand un joueur aura acheté ton animal.");
+        String message = plugin.getMessageConfig().getMobSoldShop();
+        message = MessageConverter.convert(message, entity.getType(), price, player);
+        player.sendMessage(message);
         entity.remove();
     }
 
@@ -82,7 +86,9 @@ public class ShopManager {
 
         if(alreadyBuy(player, id, entityType)) return;
         if(!player.getWorld().getName().equalsIgnoreCase("world")){
-            player.sendMessage(ChatColor.RED + "Vous devez être dans le monde survie pour acheter des mobs");
+            String message = plugin.getMessageConfig().getErrorWrongWorld();
+            message = MessageConverter.convert(message, entityType, 0, player);
+            player.sendMessage(message);
             return;
         }
 
@@ -102,7 +108,10 @@ public class ShopManager {
         double price = mobData.getPrice();
 
         if(economy < price){
-            player.sendMessage(ChatColor.RED + "Fonds insuffisant");
+            String message = plugin.getMessageConfig().getErrorInsufficientFounds();
+            message = MessageConverter.convert(message, entityType, price, player);
+            player.sendMessage(message);
+
             ShopInventory shopInventory = new ShopInventory(plugin, entityType);
             shopInventory.getInventory().open(player);
             return;
@@ -111,12 +120,16 @@ public class ShopManager {
         plugin.getEconomy().depositPlayer(author, price);
         plugin.getEconomy().withdrawPlayer(player, price);
 
-        String name = plugin.getMobShopConfig().getShopEntitiesName().get(entityType);
+        String message = plugin.getMessageConfig().getBuyerBuyMob();
+        message = MessageConverter.convert(message, entityType, price, author);
+        player.sendMessage(message);
 
-        player.sendMessage(ChatColor.WHITE + "Vous avez acheté un animal §a(" + name + ") §fau prix de §a" + price + "$");
         if(author.isOnline()){
-            author.getPlayer().sendMessage(ChatColor.GREEN + player.getName() + "§f a acheté un animal §a(" + name + ")§f, vous avez reçu §a" + price + "$");
+            message = plugin.getMessageConfig().getSellerBuyMob();
+            message = MessageConverter.convert(message, entityType, price, player);
+            author.getPlayer().sendMessage(message);
         }
+
         player.getWorld().spawnEntity(player.getLocation(), entityType);
         mobDataMap.remove(id);
 
@@ -130,7 +143,9 @@ public class ShopManager {
         if(!mobDataMap.containsKey(id)) {
             ShopInventory shopInventory = new ShopInventory(plugin, entityType);
             shopInventory.getInventory().open(player);
-            player.sendMessage(ChatColor.RED + "Le mob a déjà été acheté");
+            String message = plugin.getMessageConfig().getErrorMobAlreadyBought();
+            message = MessageConverter.convert(message, entityType, 0, player);
+            player.sendMessage(message);
             return true;
 
         }

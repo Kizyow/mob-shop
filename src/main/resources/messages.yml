@@ -1,0 +1,21 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      MESSAGES                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+mob-sold-shop: "Tu as vendu ton animal à la boucherie, tu as reçu &a<price>$"
+mob-sold-butcher: "Tu as vendu ton animal à la boutique, tu recevras &a<price>$ &fquand un joueur aura acheté ton animal"
+
+seller-buy-mob: "&a<buyer> &fa acheté un animal &a(<entity_name>)&f, vous avez reçu &a<price>$&f."
+buyer-buy-mob: "Vous avez achété un animal &a(<entity_name>)&f au prix de &a<price>$ "
+
+error-wrong-world: "&cMauvais monde"
+error-insufficient-funds: "&cPas assez d'argent"
+error-mob-already-bought: "&cLe mob a déjà été acheté"
+
+# Balises disponible :
+# - <entity_name>
+# - <price>
+# - <entity_type>
+# - <buyer>
