@@ -5,9 +5,9 @@
 ############################################################
 
 # L'inventaire qui correspond à la confirmation
-butchery-and-shop:
+confirm:
   title: "Confirm?"
-  size: 27
+  size: 9
   items:
     template:
       material: STONE
@@ -23,6 +23,7 @@ butchery-and-shop:
 # - <entity_price_shop>
 # - <entity_head_shop>
 # - <entity_type>
+# - <author>
 
 # Pour la catégorie "action:" de chaque item, voici une liste des actions disponibles:
 # - none (Ne rien faire, tu peux effacer la ligne action)

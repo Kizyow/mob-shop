@@ -43,6 +43,7 @@ public class ItemConverter {
     public static void replaceShopTag(ItemStack itemStack, String author, double price){
 
         ItemMeta itemMeta = itemStack.getItemMeta();
+        if(!itemMeta.hasLore()) return;
 
         List<String> loreMeta = itemMeta.getLore().stream()
                 .map(l -> l.replace("<author>", author))
@@ -74,6 +75,10 @@ public class ItemConverter {
 
     private static String replaceTag(String string, EntityType entityType){
 
+        if(entityType == null){
+            return string;
+        }
+
         String entityNameShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesName().get(entityType);
         String entityHeadShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
         String entityNameButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesName().get(entityType);
@@ -84,7 +89,6 @@ public class ItemConverter {
             string = string.replace("<entity_head_butcher>", entityHeadButcher);
         }
 
-        System.out.println(entityNameShop);
         string = string.replace("<entity_name_shop>", entityNameShop);
         string = string.replace("<entity_head_shop>", entityHeadShop);
         string = string.replace("<entity_type>", entityType.name());

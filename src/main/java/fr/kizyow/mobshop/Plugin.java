@@ -1,6 +1,7 @@
 package fr.kizyow.mobshop;
 
 import fr.kizyow.mobshop.commands.MobShopCommand;
+import fr.kizyow.mobshop.configurations.ConfirmConfig;
 import fr.kizyow.mobshop.configurations.MobShopConfig;
 import fr.kizyow.mobshop.configurations.SellConfig;
 import fr.kizyow.mobshop.configurations.ShopConfig;
@@ -20,6 +21,7 @@ public class Plugin extends JavaPlugin {
     private final MobShopConfig mobShopConfig = new MobShopConfig(this);
     private final SellConfig sellConfig = new SellConfig(this);
     private final ShopConfig shopConfig = new ShopConfig(this);
+    private final ConfirmConfig confirmConfig = new ConfirmConfig(this);
 
     private ShopManager shopManager;
     private InventoryManager inventoryManager;
@@ -65,7 +67,6 @@ public class Plugin extends JavaPlugin {
 
     // Getter
 
-
     public static Plugin getInstance(){
         return instance;
     }
@@ -80,6 +81,10 @@ public class Plugin extends JavaPlugin {
 
     public ShopConfig getShopConfig(){
         return shopConfig;
+    }
+
+    public ConfirmConfig getConfirmConfig(){
+        return confirmConfig;
     }
 
     public ShopManager getShopManager(){

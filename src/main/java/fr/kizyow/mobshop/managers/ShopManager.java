@@ -2,12 +2,15 @@ package fr.kizyow.mobshop.managers;
 
 import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.MobData;
+import fr.kizyow.mobshop.inventories.ConfirmInventory;
+import fr.kizyow.mobshop.inventories.ShopInventory;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,14 +74,63 @@ public class ShopManager {
         return mobDataMap;
     }
 
-    public void buyItem(ItemStack itemStack, EntityType entityType, Player player){
+    public void confirmItem(ItemStack itemStack, Player player){
 
         List<String> lore = itemStack.getItemMeta().getLore();
         String idRaw = lore.get(lore.size() - 1);
         Integer id = Integer.valueOf(idRaw.split(" ")[1]);
 
-        player.sendMessage("id:" + id);
+        if(alreadyBuy(player, id)) return;
 
+        ConfirmInventory confirmInventory = new ConfirmInventory(plugin, id);
+        confirmInventory.getInventory().open(player);
+
+    }
+
+    public void buyMob(Player player, Integer id){
+
+        if(alreadyBuy(player, id)) return;
+
+        MobData mobData = mobDataMap.get(id);
+        double economy = plugin.getEconomy().getBalance(player);
+
+        OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
+        EntityType entityType = mobData.getEntityType();
+        double price = mobData.getPrice();
+
+        if(economy < price){
+            player.sendMessage(ChatColor.RED + "Fonds insuffisant");
+            ShopInventory shopInventory = new ShopInventory(plugin);
+            shopInventory.getInventory().open(player);
+            return;
+        }
+
+        plugin.getEconomy().depositPlayer(author, price);
+        plugin.getEconomy().withdrawPlayer(player, price);
+
+        String name = plugin.getMobShopConfig().getShopEntitiesName().get(entityType);
+
+        player.sendMessage(ChatColor.WHITE + "Vous avez acheté un animal §a(" + name + ") §fau prix de §a" + price + "$");
+        if(author.isOnline()){
+            author.getPlayer().sendMessage(ChatColor.GREEN + player.getName() + "§f a acheté un animal §a(" + name + ")§f, vous avez reçu §a" + price + "$");
+        }
+        player.getWorld().spawnEntity(player.getLocation(), entityType);
+        mobDataMap.remove(id);
+        player.closeInventory();
+
+    }
+
+    private boolean alreadyBuy(Player player, Integer id){
+
+        if(!mobDataMap.containsKey(id)) {
+            ShopInventory shopInventory = new ShopInventory(plugin);
+            shopInventory.getInventory().open(player);
+            player.sendMessage(ChatColor.RED + "Le mob a déjà été acheté");
+            return true;
+
+        }
+
+        return false;
 
     }
 

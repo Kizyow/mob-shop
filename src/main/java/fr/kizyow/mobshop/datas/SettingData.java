@@ -32,4 +32,13 @@ public class SettingData {
         return itemPerPage;
     }
 
+    @Override
+    public String toString() {
+        return "SettingData{" +
+                "material='" + material + '\'' +
+                ", title='" + title + '\'' +
+                ", lore=" + lore +
+                ", itemPerPage=" + itemPerPage +
+                '}';
+    }
 }

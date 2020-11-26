@@ -8,35 +8,34 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
-import fr.minuskube.inv.content.Pagination;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class ShopInventory {
+public class ConfirmInventory {
 
     private final Plugin plugin;
+    private final Integer id;
+
     private final ShopManager shopManager;
     private final InventoryData inventoryData;
 
-    public ShopInventory(Plugin plugin){
+    public ConfirmInventory(Plugin plugin, Integer id){
         this.plugin = plugin;
+        this.id = id;
         this.shopManager = plugin.getShopManager();
-        this.inventoryData = plugin.getShopConfig().getInventoryShop();
+        this.inventoryData = plugin.getConfirmConfig().getInventoryConfirm();
 
     }
 
     public SmartInventory getInventory(){
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(inventoryData.getSettingData(), inventoryData.getItems(), shopManager))
+                .provider(new Provider(plugin, id, inventoryData.getItems(), shopManager))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -44,12 +43,14 @@ public class ShopInventory {
 
     static class Provider implements InventoryProvider {
 
-        private final SettingData settingData;
+        private final Plugin plugin;
+        private final Integer id;
         private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
 
-        public Provider(SettingData settingData, List<ItemData> itemDataList, ShopManager shopManager){
-            this.settingData = settingData;
+        public Provider(Plugin plugin, Integer id, List<ItemData> itemDataList, ShopManager shopManager){
+            this.plugin = plugin;
+            this.id = id;
             this.itemDataList = itemDataList;
             this.shopManager = shopManager;
         }
@@ -57,60 +58,38 @@ public class ShopInventory {
         @Override
         public void init(Player player, InventoryContents contents){
 
-            Pagination pagination = contents.pagination();
-            List<ClickableItem> itemList = new ArrayList<>();
+            for(ItemData itemData : itemDataList){
 
-            for(Map.Entry<Integer, MobData> entry : shopManager.getMobDataMap().entrySet()){
-
-                Integer id = entry.getKey();
-                MobData mobData = entry.getValue();
+                ActionData actionData = itemData.getAction();
+                MobData mobData = shopManager.getMobDataMap().get(id);
 
                 OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
                 double price = mobData.getPrice();
                 EntityType entityType = mobData.getEntityType();
-                List<String> loreClone = new ArrayList<>(settingData.getLore());
-                loreClone.add(ChatColor.DARK_GRAY + "ID: " + id);
 
-                ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
+                ItemStack itemStack = itemData.getItem(entityType);
                 ItemConverter.replaceShopTag(itemStack, author.getName(), price);
 
-                ClickableItem item = ClickableItem.of(itemStack, event -> {
-                    shopManager.confirmItem(itemStack, player);
-                });
-
-                itemList.add(item);
-
-            }
-
-            ClickableItem[] items = itemList.toArray(new ClickableItem[0]);
-
-            pagination.setItems(items);
-            pagination.setItemsPerPage(settingData.getItemPerPage());
-
-            for(ItemData itemData : itemDataList){
-
-                ActionData actionData = itemData.getAction();
-                ItemStack itemStack = itemData.getItem();
-
-                if(actionData == ActionData.PREVIOUS_PAGE){
+                if(actionData == ActionData.CONFIRM){
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
-                            event -> contents.inventory().open(player, pagination.previous().getPage())));
+                            event -> {
+                                shopManager.buyMob(player, id);
+                            }));
 
-                } else if(actionData == ActionData.NEXT_PAGE){
+                } else if(actionData == ActionData.REFUSE){
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
-                            event -> contents.inventory().open(player, pagination.next().getPage())));
+                            event -> {
+                                ShopInventory shopInventory = new ShopInventory(plugin);
+                                shopInventory.getInventory().open(player);
+                            }));
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
 
                 }
 
-            }
-
-            for(ClickableItem item : pagination.getPageItems()){
-                contents.add(item);
             }
 
         }

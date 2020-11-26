@@ -28,4 +28,12 @@ public class MobData {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return "MobData{" +
+                "entityType=" + entityType +
+                ", uuid=" + uuid +
+                ", price=" + price +
+                '}';
+    }
 }
