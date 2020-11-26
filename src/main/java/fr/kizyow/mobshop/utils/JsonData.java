@@ -51,7 +51,6 @@ public class JsonData {
             Map<Integer, MobData> outMap = new HashMap<>();
 
             for(Entry<?, ?> entry : jsonMap.entrySet()){
-                System.out.println(entry.getKey() + "-" + entry.getValue());
 
                 Integer id = Integer.valueOf(String.valueOf(entry.getKey()));
                 MobData mobData = gson.fromJson(String.valueOf(entry.getValue()), MobData.class);

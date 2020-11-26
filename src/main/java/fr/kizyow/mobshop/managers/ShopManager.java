@@ -26,7 +26,7 @@ public class ShopManager {
         this.mobDataMap = JsonData.loadData();
 
         if(!mobDataMap.isEmpty()){
-            mobId = Integer.valueOf(Collections.max(mobDataMap.keySet()));
+            mobId = Collections.max(mobDataMap.keySet());
         }
 
     }
