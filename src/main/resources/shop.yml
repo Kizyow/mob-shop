@@ -14,16 +14,48 @@ shop:
     lore:
       - "Price: <entity_price_shop>"
       - "Author: <author>"
-    item-per-page: 27
+    item-per-page: 45
   items:
-    template:
-      material: STONE
-      action: "none"
-      slot: 0
-      title: "Default item"
-      lore:
-        - "This is a"
-        - "simple description"
+    arrow_back:
+      material: hdb-9219
+      action: "previous_page"
+      slot: 45
+      title: "Previous page"
+      lore: []
+    arrow_next:
+      material: hdb-9217
+      action: "next_page"
+      slot: 53
+      title: "Next page"
+      lore: []
+    glass1:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 46
+      title: ""
+    glass2:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 47
+      title: ""
+    glass3:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 48
+      title: ""
+    glass4:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 49
+      title: ""
+    glass5:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 50
+      title: ""
+    glass6:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 51
+      title: ""
+    glass7:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 52
+      title: ""
 
 # Balises disponible :
 # - <entity_name_shop>

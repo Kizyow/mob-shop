@@ -1,10 +1,7 @@
 package fr.kizyow.mobshop;
 
 import fr.kizyow.mobshop.commands.MobShopCommand;
-import fr.kizyow.mobshop.configurations.ConfirmConfig;
-import fr.kizyow.mobshop.configurations.MobShopConfig;
-import fr.kizyow.mobshop.configurations.SellConfig;
-import fr.kizyow.mobshop.configurations.ShopConfig;
+import fr.kizyow.mobshop.configurations.*;
 import fr.kizyow.mobshop.listeners.MobInteractListener;
 import fr.kizyow.mobshop.managers.ShopManager;
 import fr.minuskube.inv.InventoryManager;
@@ -22,6 +19,7 @@ public class Plugin extends JavaPlugin {
     private final SellConfig sellConfig = new SellConfig(this);
     private final ShopConfig shopConfig = new ShopConfig(this);
     private final ConfirmConfig confirmConfig = new ConfirmConfig(this);
+    private final CategoryConfig categoryConfig = new CategoryConfig(this);
 
     private ShopManager shopManager;
     private InventoryManager inventoryManager;
@@ -85,6 +83,10 @@ public class Plugin extends JavaPlugin {
 
     public ConfirmConfig getConfirmConfig(){
         return confirmConfig;
+    }
+
+    public CategoryConfig getCategoryConfig(){
+        return categoryConfig;
     }
 
     public ShopManager getShopManager(){

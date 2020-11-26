@@ -1,14 +1,20 @@
 package fr.kizyow.mobshop.commands;
 
 import fr.kizyow.mobshop.Plugin;
-import fr.kizyow.mobshop.inventories.ShopInventory;
+import fr.kizyow.mobshop.inventories.CategoryInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class MobShopCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class MobShopCommand implements CommandExecutor, TabExecutor {
 
     private final Plugin plugin;
 
@@ -19,16 +25,20 @@ public class MobShopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
 
-        if(sender instanceof Player){
+        if(args.length == 0){
 
-            Player player = (Player) sender;
+            if(sender instanceof Player){
 
-            ShopInventory shopInventory = new ShopInventory(plugin);
-            shopInventory.getInventory().open(player);
+                Player player = (Player) sender;
+
+                CategoryInventory categoryInventory = new CategoryInventory(plugin);
+                categoryInventory.getInventory().open(player);
+
+            }
 
         }
 
-        if(args.length >= 1){
+        if(args.length >= 1 && sender.isOp()){
 
             String subCommand = args[0];
 
@@ -36,6 +46,8 @@ public class MobShopCommand implements CommandExecutor {
                 plugin.reloadConfig();
                 plugin.getSellConfig().reloadConfig();
                 plugin.getShopConfig().reloadConfig();
+                plugin.getCategoryConfig().reloadConfig();
+                plugin.getConfirmConfig().reloadConfig();
 
                 sender.sendMessage(ChatColor.GREEN + "All configurations were reloaded!");
 
@@ -44,6 +56,17 @@ public class MobShopCommand implements CommandExecutor {
         }
 
         return true;
+
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args){
+
+        if(args.length >= 1 && sender.isOp()){
+            return Collections.singletonList("reload");
+        }
+
+        return Collections.emptyList();
 
     }
 

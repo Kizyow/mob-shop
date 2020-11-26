@@ -7,21 +7,33 @@
 # Les entités qui peuvent être vendus aux autres joueurs
 entity-sell-shop:
   - PIG
+  - CHICKEN
+  - COW
+  - SHEEP
 
 # Le nom correspondant à chaque entité
 entity-name-shop:
   pig: "Cochon"
+  chicken: "Poulet"
+  cow: "Vache"
+  sheep: "Mouton"
 
 # La tête correspondant à chaque entité
 entity-head-shop:
   pig: hdb-14201
+  chicken: hdb-659
+  cow: hdb-29769
+  sheep: hdb-7733
 
 # Le prix de chaque entité
 entity-price-shop:
   pig: 5
+  chicken: 10
+  cow: 15
+  sheep: 20
 
 # La variation du prix (en %)
-price-variation-shop: 0
+price-variation-shop: 10
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -32,18 +44,22 @@ price-variation-shop: 0
 # Les entités qui peuvent être vendus à la boucherie
 entity-sell-butcher:
   - PIG
+  - CHICKEN
 
 # Le nom correspondant à chaque entité
 entity-name-butcher:
   pig: "Cochon"
+  chicken: "Poulet"
 
 # La tête correspondant à chaque entité
 entity-head-butcher:
   pig: hdb-26071
+  chicken: hdb-33798
 
 # Le prix de chaque entité
 entity-price-butcher:
-  pig: 5
+  pig: 2.5
+  chicken: 5
 
 # La variation du prix (en %)
-price-variation-butcher: 0
+price-variation-butcher: 10

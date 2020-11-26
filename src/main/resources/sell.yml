@@ -9,28 +9,237 @@ butchery-and-shop:
   title: "Sell"
   size: 27
   items:
-    template:
-      material: STONE
-      action: "none"
-      slot: 0
-      title: "Default item"
+    butcher:
+      material: "<entity_head_butcher>"
+      action: "sell_butcher"
+      slot: 11
+      title: "&6Sell <entity_name_butcher> to the butcher"
       lore:
-        - "This is a"
-        - "simple description"
+        - "&8Price: &6$<entity_price_butcher>"
+    shop:
+      material: "<entity_head_shop>"
+      action: "sell_shop"
+      slot: 15
+      title: "&6Sell <entity_name_shop> to the shop"
+      lore:
+        - "&8Price: &6$<entity_price_shop>"
+    glass0:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 0
+      title: ""
+    glass1:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 1
+      title: ""
+    glass2:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 2
+      title: ""
+    glass3:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 3
+      title: ""
+    glass4:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 4
+      title: ""
+    glass5:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 5
+      title: ""
+    glass6:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 6
+      title: ""
+    glass7:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 7
+      title: ""
+    glass8:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 8
+      title: ""
+    glass9:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 9
+      title: ""
+    glass10:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 17
+      title: ""
+    glass11:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 18
+      title: ""
+    glass12:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 19
+      title: ""
+    glass13:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 20
+      title: ""
+    glass14:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 21
+      title: ""
+    glass15:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 22
+      title: ""
+    glass16:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 23
+      title: ""
+    glass17:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 24
+      title: ""
+    glass18:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 25
+      title: ""
+    glass19:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 26
+      title: ""
+    glass20:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 10
+      title: ""
+    glass21:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 12
+      title: ""
+    glass22:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 13
+      title: ""
+    glass23:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 14
+      title: ""
+    glass24:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 16
+      title: ""
 
 # L'inventaire qui correspond à la vente UNIQUEMENT au shop
 shop-only:
   title: "Sell"
   size: 27
   items:
-    template:
-      material: STONE
-      action: "none"
-      slot: 0
-      title: "Default item"
+    shop:
+      material: "<entity_head_shop>"
+      action: "sell_shop"
+      slot: 13
+      title: "&6Sell <entity_name_shop> to the shop"
       lore:
-        - "This is a"
-        - "simple description"
+        - "&8Price: &6$<entity_price_shop>"
+    glass0:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 0
+      title: ""
+    glass1:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 1
+      title: ""
+    glass2:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 2
+      title: ""
+    glass3:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 3
+      title: ""
+    glass4:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 4
+      title: ""
+    glass5:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 5
+      title: ""
+    glass6:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 6
+      title: ""
+    glass7:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 7
+      title: ""
+    glass8:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 8
+      title: ""
+    glass9:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 9
+      title: ""
+    glass10:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 17
+      title: ""
+    glass11:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 18
+      title: ""
+    glass12:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 19
+      title: ""
+    glass13:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 20
+      title: ""
+    glass14:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 21
+      title: ""
+    glass15:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 22
+      title: ""
+    glass16:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 23
+      title: ""
+    glass17:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 24
+      title: ""
+    glass18:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 25
+      title: ""
+    glass19:
+      material: BLACK_STAINED_GLASS_PANE
+      slot: 26
+      title: ""
+    glass20:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 10
+      title: ""
+    glass21:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 11
+      title: ""
+    glass22:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 12
+      title: ""
+    glass23:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 14
+      title: ""
+    glass24:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 15
+      title: ""
+    glass25:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 16
+      title: ""
 
 # Balises disponible :
 # - <entity_name_shop>

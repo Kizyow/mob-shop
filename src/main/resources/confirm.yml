@@ -9,14 +9,49 @@ confirm:
   title: "Confirm?"
   size: 9
   items:
-    template:
-      material: STONE
-      action: "none"
-      slot: 0
-      title: "Default item"
+    entity_head:
+      material: "<entity_head_shop>"
+      slot: 1
+      title: "<entity_name_shop>"
       lore:
-        - "This is a"
-        - "simple description"
+        - "Price: <entity_price_shop>"
+        - "Author: <author>"
+    confirm:
+      material: GREEN_WOOL
+      slot: 5
+      action: "confirm"
+      title: "&aConfirm"
+      lore: []
+    refuse:
+      material: RED_WOOL
+      slot: 7
+      action: "refuse"
+      title: "&cRefuse"
+      lore: []
+    glass1:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 0
+      title: ""
+    glass2:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 2
+      title: ""
+    glass3:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 3
+      title: ""
+    glass4:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 4
+      title: ""
+    glass5:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 6
+      title: ""
+    glass6:
+      material: WHITE_STAINED_GLASS_PANE
+      slot: 8
+      title: ""
 
 # Balises disponible :
 # - <entity_name_shop>

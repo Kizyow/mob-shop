@@ -74,33 +74,36 @@ public class ShopManager {
         return mobDataMap;
     }
 
-    public void confirmItem(ItemStack itemStack, Player player){
+    public void confirmItem(ItemStack itemStack, Player player, EntityType entityType){
 
         List<String> lore = itemStack.getItemMeta().getLore();
         String idRaw = lore.get(lore.size() - 1);
         Integer id = Integer.valueOf(idRaw.split(" ")[1]);
 
-        if(alreadyBuy(player, id)) return;
+        if(alreadyBuy(player, id, entityType)) return;
+        if(!player.getWorld().getName().equalsIgnoreCase("world")){
+            player.sendMessage(ChatColor.RED + "Vous devez être dans le monde survie pour acheter des mobs");
+            return;
+        }
 
         ConfirmInventory confirmInventory = new ConfirmInventory(plugin, id);
         confirmInventory.getInventory().open(player);
 
     }
 
-    public void buyMob(Player player, Integer id){
+    public void buyMob(Player player, Integer id, EntityType entityType){
 
-        if(alreadyBuy(player, id)) return;
+        if(alreadyBuy(player, id, entityType)) return;
 
         MobData mobData = mobDataMap.get(id);
         double economy = plugin.getEconomy().getBalance(player);
 
         OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
-        EntityType entityType = mobData.getEntityType();
         double price = mobData.getPrice();
 
         if(economy < price){
             player.sendMessage(ChatColor.RED + "Fonds insuffisant");
-            ShopInventory shopInventory = new ShopInventory(plugin);
+            ShopInventory shopInventory = new ShopInventory(plugin, entityType);
             shopInventory.getInventory().open(player);
             return;
         }
@@ -116,14 +119,16 @@ public class ShopManager {
         }
         player.getWorld().spawnEntity(player.getLocation(), entityType);
         mobDataMap.remove(id);
-        player.closeInventory();
+
+        ShopInventory shopInventory = new ShopInventory(plugin, entityType);
+        shopInventory.getInventory().open(player);
 
     }
 
-    private boolean alreadyBuy(Player player, Integer id){
+    private boolean alreadyBuy(Player player, Integer id, EntityType entityType){
 
         if(!mobDataMap.containsKey(id)) {
-            ShopInventory shopInventory = new ShopInventory(plugin);
+            ShopInventory shopInventory = new ShopInventory(plugin, entityType);
             shopInventory.getInventory().open(player);
             player.sendMessage(ChatColor.RED + "Le mob a déjà été acheté");
             return true;

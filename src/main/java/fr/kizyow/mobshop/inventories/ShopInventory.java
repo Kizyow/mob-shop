@@ -23,11 +23,13 @@ import java.util.Map;
 public class ShopInventory {
 
     private final Plugin plugin;
+    private final EntityType entityType;
     private final ShopManager shopManager;
     private final InventoryData inventoryData;
 
-    public ShopInventory(Plugin plugin){
+    public ShopInventory(Plugin plugin, EntityType entityType){
         this.plugin = plugin;
+        this.entityType = entityType;
         this.shopManager = plugin.getShopManager();
         this.inventoryData = plugin.getShopConfig().getInventoryShop();
 
@@ -36,7 +38,7 @@ public class ShopInventory {
     public SmartInventory getInventory(){
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(inventoryData.getSettingData(), inventoryData.getItems(), shopManager))
+                .provider(new Provider(inventoryData.getSettingData(), entityType, inventoryData.getItems(), shopManager))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -45,11 +47,13 @@ public class ShopInventory {
     static class Provider implements InventoryProvider {
 
         private final SettingData settingData;
+        private final EntityType entityType;
         private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
 
-        public Provider(SettingData settingData, List<ItemData> itemDataList, ShopManager shopManager){
+        public Provider(SettingData settingData, EntityType entityType, List<ItemData> itemDataList, ShopManager shopManager){
             this.settingData = settingData;
+            this.entityType = entityType;
             this.itemDataList = itemDataList;
             this.shopManager = shopManager;
         }
@@ -65,20 +69,24 @@ public class ShopInventory {
                 Integer id = entry.getKey();
                 MobData mobData = entry.getValue();
 
-                OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
-                double price = mobData.getPrice();
-                EntityType entityType = mobData.getEntityType();
-                List<String> loreClone = new ArrayList<>(settingData.getLore());
-                loreClone.add(ChatColor.DARK_GRAY + "ID: " + id);
+                EntityType mobType = mobData.getEntityType();
 
-                ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
-                ItemConverter.replaceShopTag(itemStack, author.getName(), price);
+                if(entityType == mobType){
+                    OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
+                    double price = mobData.getPrice();
+                    List<String> loreClone = new ArrayList<>(settingData.getLore());
+                    loreClone.add(ChatColor.DARK_GRAY + "ID: " + id);
 
-                ClickableItem item = ClickableItem.of(itemStack, event -> {
-                    shopManager.confirmItem(itemStack, player);
-                });
+                    ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
+                    ItemConverter.replaceShopTag(itemStack, author.getName(), price);
 
-                itemList.add(item);
+                    ClickableItem item = ClickableItem.of(itemStack, event -> {
+                        shopManager.confirmItem(itemStack, player, entityType);
+                    });
+
+                    itemList.add(item);
+
+                }
 
             }
 
@@ -101,6 +109,11 @@ public class ShopInventory {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> contents.inventory().open(player, pagination.next().getPage())));
+
+                } else if(actionData == ActionData.CLOSE){
+
+                contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
+                        event -> player.closeInventory()));
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));

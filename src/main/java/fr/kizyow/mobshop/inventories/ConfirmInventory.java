@@ -74,16 +74,21 @@ public class ConfirmInventory {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> {
-                                shopManager.buyMob(player, id);
+                                shopManager.buyMob(player, id, entityType);
                             }));
 
                 } else if(actionData == ActionData.REFUSE){
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> {
-                                ShopInventory shopInventory = new ShopInventory(plugin);
+                                ShopInventory shopInventory = new ShopInventory(plugin, entityType);
                                 shopInventory.getInventory().open(player);
                             }));
+
+                } else if(actionData == ActionData.CLOSE){
+
+                    contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
+                            event -> player.closeInventory()));
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));

@@ -88,6 +88,11 @@ public class SellInventory {
                                 player.closeInventory();
                             }));
 
+                } else if(actionData == ActionData.CLOSE){
+
+                    contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
+                            event -> player.closeInventory()));
+
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
                 }

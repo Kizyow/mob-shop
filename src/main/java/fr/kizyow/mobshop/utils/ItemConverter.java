@@ -55,6 +55,20 @@ public class ItemConverter {
 
     }
 
+    public static void replaceOfferTag(ItemStack itemStack, Integer offer){
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if(!itemMeta.hasLore()) return;
+
+        List<String> loreMeta = itemMeta.getLore().stream()
+                .map(l -> l.replace("<offres>", String.valueOf(offer)))
+                .collect(Collectors.toList());
+        itemMeta.setLore(loreMeta);
+
+        itemStack.setItemMeta(itemMeta);
+
+    }
+
     private static void customMeta(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
 
         ItemMeta itemMeta = itemStack.getItemMeta();
