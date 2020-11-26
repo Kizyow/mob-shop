@@ -14,6 +14,8 @@ error-wrong-world: "&cMauvais monde"
 error-insufficient-funds: "&cPas assez d'argent"
 error-mob-already-bought: "&cLe mob a déjà été acheté"
 
+time-out: "La semaine est passé, personne n'a acheté votre <entity_name>, vous recevez &a<price>$ &f(50% du prix initial) et votre mob a été supprimé"
+
 # Balises disponible :
 # - <entity_name>
 # - <price>

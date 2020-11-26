@@ -40,7 +40,7 @@ public class ItemConverter {
 
     }
 
-    public static void replaceShopTag(ItemStack itemStack, String author, double price){
+    public static void replaceShopTag(ItemStack itemStack, String author, double price, String timeLeft){
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         if(!itemMeta.hasLore()) return;
@@ -48,6 +48,7 @@ public class ItemConverter {
         List<String> loreMeta = itemMeta.getLore().stream()
                 .map(l -> l.replace("<author>", author))
                 .map(l -> l.replace("<entity_price_shop>", String.valueOf(price)))
+                .map(l -> l.replace("<expire_at>", timeLeft))
                 .collect(Collectors.toList());
         itemMeta.setLore(loreMeta);
 

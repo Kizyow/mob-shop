@@ -3,6 +3,7 @@ package fr.kizyow.mobshop.inventories;
 import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.*;
 import fr.kizyow.mobshop.managers.ShopManager;
+import fr.kizyow.mobshop.utils.ItemComparator;
 import fr.kizyow.mobshop.utils.ItemConverter;
 import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
@@ -17,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -78,18 +80,21 @@ public class ShopInventory {
                     loreClone.add(ChatColor.DARK_GRAY + "ID: " + id);
 
                     ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
-                    ItemConverter.replaceShopTag(itemStack, author.getName(), price);
+                    ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
                     ClickableItem item = ClickableItem.of(itemStack, event -> {
                         shopManager.confirmItem(itemStack, player, entityType);
                     });
 
-                    itemList.add(item);
+                    if(!shopManager.checkTimeLeft(id)){
+                        itemList.add(item);
+                    }
 
                 }
 
             }
 
+            itemList.sort(new ItemComparator());
             ClickableItem[] items = itemList.toArray(new ClickableItem[0]);
 
             pagination.setItems(items);

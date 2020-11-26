@@ -42,4 +42,8 @@ public class MessageConfig extends AbstractConfig {
         return getConfig().getString("error-mob-already-bought");
     }
 
+    public String getTimeOut(){
+        return getConfig().getString("time-out");
+    }
+
 }

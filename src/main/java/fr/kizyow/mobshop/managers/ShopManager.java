@@ -26,8 +26,32 @@ public class ShopManager {
         this.mobDataMap = JsonData.loadData();
 
         if(!mobDataMap.isEmpty()){
-            mobId = Collections.max(mobDataMap.keySet());
+            mobId = Collections.max(mobDataMap.keySet()) + 1;
         }
+
+    }
+
+    public boolean checkTimeLeft(Integer id){
+        MobData mobData = mobDataMap.get(id);
+        boolean timeOut = (mobData.getExpireAt() - System.currentTimeMillis()) < 0;
+
+        if(timeOut){
+            OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
+            plugin.getEconomy().depositPlayer(author, mobData.getPrice() / 2);
+
+            if(author.isOnline()){
+                Player authorPlayer = author.getPlayer();
+                String message = plugin.getMessageConfig().getTimeOut();
+                message = MessageConverter.convert(message, mobData.getEntityType(), mobData.getPrice(), author);
+                authorPlayer.sendMessage(message);
+                authorPlayer.playSound(authorPlayer.getLocation(), "entity." + mobData.getEntityType().getKey().getKey() + ".hurt", 1.0F, 1.0F);
+            }
+
+            mobDataMap.remove(id);
+
+        }
+
+        return timeOut;
 
     }
 
@@ -74,10 +98,6 @@ public class ShopManager {
         message = MessageConverter.convert(message, entity.getType(), price, player);
         player.sendMessage(message);
         entity.remove();
-    }
-
-    public Map<Integer, MobData> getMobDataMap(){
-        return mobDataMap;
     }
 
     public void confirmItem(ItemStack itemStack, Player player, EntityType entityType){
@@ -127,9 +147,11 @@ public class ShopManager {
         player.sendMessage(message);
 
         if(author.isOnline()){
+            Player authorPlayer = author.getPlayer();
             message = plugin.getMessageConfig().getSellerBuyMob();
             message = MessageConverter.convert(message, entityType, price, player);
-            author.getPlayer().sendMessage(message);
+            authorPlayer.sendMessage(message);
+            authorPlayer.playSound(authorPlayer.getLocation(), "entity." + entityType.getKey().getKey() + ".ambient", 1.0F, 1.0F);
         }
 
         player.getWorld().spawnEntity(player.getLocation(), entityType);
@@ -154,6 +176,10 @@ public class ShopManager {
 
         return false;
 
+    }
+
+    public Map<Integer, MobData> getMobDataMap(){
+        return mobDataMap;
     }
 
 }

@@ -68,7 +68,7 @@ public class ConfirmInventory {
                 EntityType entityType = mobData.getEntityType();
 
                 ItemStack itemStack = itemData.getItem(entityType);
-                ItemConverter.replaceShopTag(itemStack, author.getName(), price);
+                ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
                 if(actionData == ActionData.CONFIRM){
 
