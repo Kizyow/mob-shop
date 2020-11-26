@@ -3,6 +3,7 @@ package fr.kizyow.mobshop;
 import fr.kizyow.mobshop.commands.MobShopCommand;
 import fr.kizyow.mobshop.configurations.*;
 import fr.kizyow.mobshop.listeners.MobInteractListener;
+import fr.kizyow.mobshop.listeners.PlayerJoinListener;
 import fr.kizyow.mobshop.managers.ShopManager;
 import fr.kizyow.mobshop.utils.JsonData;
 import fr.minuskube.inv.InventoryManager;
@@ -44,6 +45,9 @@ public class Plugin extends JavaPlugin {
         MobInteractListener mobInteractListener = new MobInteractListener(this);
         Bukkit.getPluginManager().registerEvents(mobInteractListener, this);
 
+        PlayerJoinListener playerJoinListener = new PlayerJoinListener(this);
+        Bukkit.getPluginManager().registerEvents(playerJoinListener, this);
+
         MobShopCommand mobShopCommand = new MobShopCommand(this);
         getCommand("mobshop").setExecutor(mobShopCommand);
 
@@ -51,7 +55,8 @@ public class Plugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        JsonData.saveData(shopManager.getMobDataMap());
+        JsonData.saveMobData(shopManager.getMobDataMap());
+        JsonData.savePlayerData(shopManager.getDataOfflinePlayer());
 
     }
 

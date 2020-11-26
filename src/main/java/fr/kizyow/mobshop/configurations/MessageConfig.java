@@ -40,4 +40,12 @@ public class MessageConfig extends AbstractConfig {
         return getConfig().getString("time-out");
     }
 
+    public String getPaperTitle(){
+        return getConfig().getString("paper-title");
+    }
+
+    public String getPaperTemplate(){
+        return getConfig().getString("paper-lore-template");
+    }
+
 }

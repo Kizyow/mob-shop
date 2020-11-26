@@ -19,11 +19,13 @@ public class ShopManager {
 
     private final Plugin plugin;
     private final Map<Integer, MobData> mobDataMap;
+    private final Map<UUID, List<String>> dataOfflinePlayer;
     private Integer mobId = 0;
 
     public ShopManager(Plugin plugin) {
         this.plugin = plugin;
-        this.mobDataMap = JsonData.loadData();
+        this.mobDataMap = JsonData.loadMobData();
+        this.dataOfflinePlayer = JsonData.loadPlayerData();
 
         if (!mobDataMap.isEmpty()) {
             mobId = Collections.max(mobDataMap.keySet()) + 1;
@@ -146,12 +148,21 @@ public class ShopManager {
         message = MessageConverter.convert(message, entityType, price, author);
         player.sendMessage(message);
 
-        if (author.isOnline()) {
+        if (author.isOnline()){
             Player authorPlayer = author.getPlayer();
             message = plugin.getMessageConfig().getSellerBuyMob();
             message = MessageConverter.convert(message, entityType, price, player);
             authorPlayer.sendMessage(message);
             authorPlayer.playSound(authorPlayer.getLocation(), "entity." + entityType.getKey().getKey() + ".ambient", 1.0F, 1.0F);
+        } else {
+
+            if(!dataOfflinePlayer.containsKey(author.getUniqueId())){
+                dataOfflinePlayer.put(author.getUniqueId(), new ArrayList<>());
+            }
+
+            String template = MessageConverter.convert(plugin.getMessageConfig().getPaperTemplate(), entityType, price, player);
+            dataOfflinePlayer.get(author.getUniqueId()).add(template);
+
         }
 
         player.getWorld().spawnEntity(player.getLocation(), entityType);
@@ -180,6 +191,10 @@ public class ShopManager {
 
     public Map<Integer, MobData> getMobDataMap() {
         return mobDataMap;
+    }
+
+    public Map<UUID, List<String>> getDataOfflinePlayer() {
+        return dataOfflinePlayer;
     }
 
 }

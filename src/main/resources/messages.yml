@@ -16,6 +16,9 @@ error-mob-already-bought: "&cLe mob a déjà été acheté"
 
 time-out: "La semaine est passé, personne n'a acheté votre <entity_name>, vous recevez &a<price>$ &f(50% du prix initial) et votre mob a été supprimé"
 
+paper-title: "&eRevenus boutique"
+paper-lore-template: "&e<entity_name> &6(<price>$)"
+
 # Balises disponible :
 # - <entity_name>
 # - <price>
