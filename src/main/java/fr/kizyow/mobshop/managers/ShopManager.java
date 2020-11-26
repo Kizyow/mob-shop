@@ -4,19 +4,16 @@ import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.MobData;
 import fr.kizyow.mobshop.inventories.ConfirmInventory;
 import fr.kizyow.mobshop.inventories.ShopInventory;
+import fr.kizyow.mobshop.utils.JsonData;
 import fr.kizyow.mobshop.utils.MessageConverter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class ShopManager {
 
@@ -26,7 +23,12 @@ public class ShopManager {
 
     public ShopManager(Plugin plugin){
         this.plugin = plugin;
-        this.mobDataMap = new HashMap<>();
+        this.mobDataMap = JsonData.loadData();
+
+        if(!mobDataMap.isEmpty()){
+            mobId = Integer.valueOf(Collections.max(mobDataMap.keySet()));
+        }
+
     }
 
     public Double generatePriceButcher(EntityType type){

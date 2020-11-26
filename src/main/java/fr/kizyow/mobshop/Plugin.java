@@ -4,6 +4,7 @@ import fr.kizyow.mobshop.commands.MobShopCommand;
 import fr.kizyow.mobshop.configurations.*;
 import fr.kizyow.mobshop.listeners.MobInteractListener;
 import fr.kizyow.mobshop.managers.ShopManager;
+import fr.kizyow.mobshop.utils.JsonData;
 import fr.minuskube.inv.InventoryManager;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import net.milkbowl.vault.economy.Economy;
@@ -49,7 +50,10 @@ public class Plugin extends JavaPlugin {
     }
 
     @Override
-    public void onDisable(){}
+    public void onDisable(){
+        JsonData.saveData(shopManager.getMobDataMap());
+
+    }
 
     private void setupEconomy(){
         if(getServer().getPluginManager().getPlugin("Vault") == null){
