@@ -13,23 +13,23 @@ public class MobShopConfig {
 
     private final Plugin plugin;
 
-    public MobShopConfig(Plugin plugin){
+    public MobShopConfig(Plugin plugin) {
         this.plugin = plugin;
         plugin.saveDefaultConfig();
 
     }
 
-    public List<EntityType> getShopEntities(){
+    public List<EntityType> getShopEntities() {
         List<String> entityString = plugin.getConfig().getStringList("entity-sell-shop");
         return entityString.stream().map(EntityType::valueOf).collect(Collectors.toList());
     }
 
-    public Map<EntityType, String> getShopEntitiesName(){
+    public Map<EntityType, String> getShopEntitiesName() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-name-shop");
         Map<EntityType, String> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             String name = (String) entry.getValue();
             outMap.put(entityType, name);
@@ -39,12 +39,12 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, List<String>> getShopEntitiesHead(){
+    public Map<EntityType, List<String>> getShopEntitiesHead() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-head-shop");
         Map<EntityType, List<String>> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             List<String> headString = (List<String>) entry.getValue();
             outMap.put(entityType, headString);
@@ -54,12 +54,12 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, Double> getShopEntitiesPrices(){
+    public Map<EntityType, Double> getShopEntitiesPrices() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-price-shop");
         Map<EntityType, Double> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             String stringPrice = String.valueOf(entry.getValue());
             Double price = Double.parseDouble(stringPrice);
@@ -70,21 +70,21 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Integer getShopVariation(){
+    public Integer getShopVariation() {
         return plugin.getConfig().getInt("price-variation-shop");
     }
 
-    public List<EntityType> getButcherEntities(){
+    public List<EntityType> getButcherEntities() {
         List<String> entityString = plugin.getConfig().getStringList("entity-sell-butcher");
         return entityString.stream().map(EntityType::valueOf).collect(Collectors.toList());
     }
 
-    public Map<EntityType, String> getButcherEntitiesName(){
+    public Map<EntityType, String> getButcherEntitiesName() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-name-butcher");
         Map<EntityType, String> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             String name = (String) entry.getValue();
             outMap.put(entityType, name);
@@ -94,12 +94,12 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, String> getButcherEntitiesHead(){
+    public Map<EntityType, String> getButcherEntitiesHead() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-head-butcher");
         Map<EntityType, String> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             String headString = (String) entry.getValue();
             outMap.put(entityType, headString);
@@ -109,12 +109,12 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, Double> getButcherEntitiesPrices(){
+    public Map<EntityType, Double> getButcherEntitiesPrices() {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-price-butcher");
         Map<EntityType, Double> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
-        for(Map.Entry<String, Object> entry : values.entrySet()){
+        for (Map.Entry<String, Object> entry : values.entrySet()) {
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
             String stringPrice = String.valueOf(entry.getValue());
             Double price = Double.parseDouble(stringPrice);
@@ -125,7 +125,7 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Integer getButcherVariation(){
+    public Integer getButcherVariation() {
         return plugin.getConfig().getInt("price-variation-butcher");
     }
 

@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 
 public class ItemConverter {
 
-    public static ItemStack getPredefinedItem(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
+    public static ItemStack getPredefinedItem(ItemStack itemStack, String title, List<String> lore, EntityType entityType) {
         customMeta(itemStack, title, lore, entityType);
         return itemStack;
 
     }
 
-    public static ItemStack getItem(String strMaterial, String title, List<String> lore, EntityType entityType, boolean random){
+    public static ItemStack getItem(String strMaterial, String title, List<String> lore, EntityType entityType, boolean random) {
 
         ItemStack itemStack = customHead(entityType, strMaterial, random);
-        if(itemStack == null){
+        if (itemStack == null) {
             Material material = Material.valueOf(strMaterial);
             itemStack = new ItemStack(material);
         }
@@ -33,7 +33,7 @@ public class ItemConverter {
 
     }
 
-    public static void replacePriceTag(ItemStack itemStack, double price){
+    public static void replacePriceTag(ItemStack itemStack, double price) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -47,10 +47,10 @@ public class ItemConverter {
 
     }
 
-    public static void replaceShopTag(ItemStack itemStack, String author, double price, String timeLeft){
+    public static void replaceShopTag(ItemStack itemStack, String author, double price, String timeLeft) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if(!itemMeta.hasLore()) return;
+        if (!itemMeta.hasLore()) return;
 
         List<String> loreMeta = itemMeta.getLore().stream()
                 .map(l -> l.replace("<author>", author))
@@ -63,10 +63,10 @@ public class ItemConverter {
 
     }
 
-    public static void replaceOfferTag(ItemStack itemStack, Integer offer){
+    public static void replaceOfferTag(ItemStack itemStack, Integer offer) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if(!itemMeta.hasLore()) return;
+        if (!itemMeta.hasLore()) return;
 
         List<String> loreMeta = itemMeta.getLore().stream()
                 .map(l -> l.replace("<offres>", String.valueOf(offer)))
@@ -77,7 +77,7 @@ public class ItemConverter {
 
     }
 
-    private static void customMeta(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
+    private static void customMeta(ItemStack itemStack, String title, List<String> lore, EntityType entityType) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -95,9 +95,9 @@ public class ItemConverter {
 
     }
 
-    private static String replaceTag(String string, EntityType entityType){
+    private static String replaceTag(String string, EntityType entityType) {
 
-        if(entityType == null){
+        if (entityType == null) {
             return string;
         }
 
@@ -106,7 +106,7 @@ public class ItemConverter {
         String entityNameButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesName().get(entityType);
         String entityHeadButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesHead().get(entityType);
 
-        if(entityNameButcher != null && entityHeadButcher != null){
+        if (entityNameButcher != null && entityHeadButcher != null) {
             string = string.replace("<entity_name_butcher>", entityNameButcher);
             string = string.replace("<entity_head_butcher>", entityHeadButcher);
         }
@@ -119,16 +119,16 @@ public class ItemConverter {
 
     }
 
-    private static ItemStack customHead(EntityType entityType, String material, boolean random){
+    private static ItemStack customHead(EntityType entityType, String material, boolean random) {
 
         String data = "";
 
-        if(material.equalsIgnoreCase("<entity_head_shop>")){
+        if (material.equalsIgnoreCase("<entity_head_shop>")) {
 
             List<String> dataHead = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
 
 
-            if(random){
+            if (random) {
                 Random random1 = new Random();
                 int select = random1.nextInt(dataHead.size());
                 data = dataHead.get(select);
@@ -137,9 +137,9 @@ public class ItemConverter {
 
             }
 
-        } else if(material.equalsIgnoreCase("<entity_head_butcher>")){
+        } else if (material.equalsIgnoreCase("<entity_head_butcher>")) {
             data = Plugin.getInstance().getMobShopConfig().getButcherEntitiesHead().get(entityType);
-        } else if(material.startsWith("hdb-")){
+        } else if (material.startsWith("hdb-")) {
             data = material;
         } else {
             return null;
@@ -148,7 +148,7 @@ public class ItemConverter {
         String id = data.substring(4);
         ItemStack itemStack = Plugin.getInstance().getHeadDatabaseAPI().getItemHead(id);
 
-        if(itemStack == null){
+        if (itemStack == null) {
             itemStack = new ItemStack(Material.ZOMBIE_HEAD);
         }
 

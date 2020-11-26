@@ -15,15 +15,15 @@ public abstract class AbstractConfig {
     private File file;
     private FileConfiguration config;
 
-    public AbstractConfig(Plugin plugin, String configName){
+    public AbstractConfig(Plugin plugin, String configName) {
         this.plugin = plugin;
         this.configName = configName;
         this.createConfig();
     }
 
-    private void createConfig(){
+    private void createConfig() {
         file = new File(plugin.getDataFolder(), configName);
-        if(!file.exists()){
+        if (!file.exists()) {
             file.getParentFile().mkdirs();
             plugin.saveResource(configName, false);
         }
@@ -32,13 +32,13 @@ public abstract class AbstractConfig {
 
         try {
             config.load(file);
-        } catch (IOException | InvalidConfigurationException e){
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void loadConfig(){
+    public void loadConfig() {
         try {
             config.load(file);
         } catch (IOException | InvalidConfigurationException e) {
@@ -46,20 +46,20 @@ public abstract class AbstractConfig {
         }
     }
 
-    public void saveConfig(){
+    public void saveConfig() {
         try {
             config.save(file);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void reloadConfig(){
+    public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(file);
     }
 
-    public FileConfiguration getConfig(){
+    public FileConfiguration getConfig() {
         return config;
     }
 

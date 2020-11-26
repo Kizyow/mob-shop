@@ -10,11 +10,11 @@ import java.util.List;
 
 public class SellConfig extends AbstractConfig {
 
-    public SellConfig(Plugin plugin){
+    public SellConfig(Plugin plugin) {
         super(plugin, "sell.yml");
     }
 
-    public InventoryData getInventoryButcheryAndShop(){
+    public InventoryData getInventoryButcheryAndShop() {
 
         ConfigurationSection inventorySection = getConfig().getConfigurationSection("butchery-and-shop");
         String inventoryTitle = inventorySection.getString("title");
@@ -23,7 +23,7 @@ public class SellConfig extends AbstractConfig {
         ConfigurationSection itemSection = inventorySection.getConfigurationSection("items");
         List<ItemData> itemDataList = new ArrayList<>();
 
-        for(String item : itemSection.getKeys(false)){
+        for (String item : itemSection.getKeys(false)) {
             String itemMaterial = itemSection.getString(item + ".material");
             String action = itemSection.getString(item + ".action");
             Integer itemSlot = itemSection.getInt(item + ".slot");
@@ -39,7 +39,7 @@ public class SellConfig extends AbstractConfig {
 
     }
 
-    public InventoryData getInventoryShopOnly(){
+    public InventoryData getInventoryShopOnly() {
 
         ConfigurationSection inventorySection = getConfig().getConfigurationSection("shop-only");
         String inventoryTitle = inventorySection.getString("title");
@@ -48,7 +48,7 @@ public class SellConfig extends AbstractConfig {
         ConfigurationSection itemSection = inventorySection.getConfigurationSection("items");
         List<ItemData> itemDataList = new ArrayList<>();
 
-        for(String item : itemSection.getKeys(false)){
+        for (String item : itemSection.getKeys(false)) {
             String itemMaterial = itemSection.getString(item + ".material");
             String action = itemSection.getString(item + ".action");
             Integer itemSlot = itemSection.getInt(item + ".slot");

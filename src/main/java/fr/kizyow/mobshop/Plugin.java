@@ -29,7 +29,7 @@ public class Plugin extends JavaPlugin {
     private Economy economy;
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         instance = this;
 
         this.shopManager = new ShopManager(this);
@@ -50,18 +50,18 @@ public class Plugin extends JavaPlugin {
     }
 
     @Override
-    public void onDisable(){
+    public void onDisable() {
         JsonData.saveData(shopManager.getMobDataMap());
 
     }
 
-    private void setupEconomy(){
-        if(getServer().getPluginManager().getPlugin("Vault") == null){
+    private void setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return;
         }
 
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if(rsp == null){
+        if (rsp == null) {
             return;
         }
 
@@ -70,47 +70,47 @@ public class Plugin extends JavaPlugin {
 
     // Getter
 
-    public static Plugin getInstance(){
+    public static Plugin getInstance() {
         return instance;
     }
 
-    public MobShopConfig getMobShopConfig(){
+    public MobShopConfig getMobShopConfig() {
         return mobShopConfig;
     }
 
-    public SellConfig getSellConfig(){
+    public SellConfig getSellConfig() {
         return sellConfig;
     }
 
-    public ShopConfig getShopConfig(){
+    public ShopConfig getShopConfig() {
         return shopConfig;
     }
 
-    public ConfirmConfig getConfirmConfig(){
+    public ConfirmConfig getConfirmConfig() {
         return confirmConfig;
     }
 
-    public CategoryConfig getCategoryConfig(){
+    public CategoryConfig getCategoryConfig() {
         return categoryConfig;
     }
 
-    public MessageConfig getMessageConfig(){
+    public MessageConfig getMessageConfig() {
         return messageConfig;
     }
 
-    public ShopManager getShopManager(){
+    public ShopManager getShopManager() {
         return shopManager;
     }
 
-    public InventoryManager getInventoryManager(){
+    public InventoryManager getInventoryManager() {
         return inventoryManager;
     }
 
-    public HeadDatabaseAPI getHeadDatabaseAPI(){
+    public HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabaseAPI;
     }
 
-    public Economy getEconomy(){
+    public Economy getEconomy() {
         return economy;
     }
 

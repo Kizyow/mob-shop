@@ -25,7 +25,7 @@ public class ConfirmInventory {
     private final ShopManager shopManager;
     private final InventoryData inventoryData;
 
-    public ConfirmInventory(Plugin plugin, ItemStack item, Integer id){
+    public ConfirmInventory(Plugin plugin, ItemStack item, Integer id) {
         this.plugin = plugin;
         this.item = item;
         this.id = id;
@@ -34,7 +34,7 @@ public class ConfirmInventory {
 
     }
 
-    public SmartInventory getInventory(){
+    public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
                 .provider(new Provider(plugin, item, id, inventoryData.getItems(), shopManager))
@@ -51,7 +51,7 @@ public class ConfirmInventory {
         private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
 
-        public Provider(Plugin plugin, ItemStack item, Integer id, List<ItemData> itemDataList, ShopManager shopManager){
+        public Provider(Plugin plugin, ItemStack item, Integer id, List<ItemData> itemDataList, ShopManager shopManager) {
             this.plugin = plugin;
             this.item = item;
             this.id = id;
@@ -60,9 +60,9 @@ public class ConfirmInventory {
         }
 
         @Override
-        public void init(Player player, InventoryContents contents){
+        public void init(Player player, InventoryContents contents) {
 
-            for(ItemData itemData : itemDataList){
+            for (ItemData itemData : itemDataList) {
 
                 ActionData actionData = itemData.getAction();
                 MobData mobData = shopManager.getMobDataMap().get(id);
@@ -74,21 +74,19 @@ public class ConfirmInventory {
                 ItemStack itemStack = itemData.getItem(entityType);
                 ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
-                if(actionData == ActionData.PREDEFINE){
+                if (actionData == ActionData.PREDEFINE) {
 
                     itemStack = itemData.getPredefinedItem(item, entityType);
                     ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
 
-                } else if(actionData == ActionData.CONFIRM){
+                } else if (actionData == ActionData.CONFIRM) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
-                            event -> {
-                                shopManager.buyMob(player, id, entityType);
-                            }));
+                            event -> shopManager.buyMob(player, id, entityType)));
 
-                } else if(actionData == ActionData.REFUSE){
+                } else if (actionData == ActionData.REFUSE) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> {
@@ -96,7 +94,7 @@ public class ConfirmInventory {
                                 shopInventory.getInventory().open(player);
                             }));
 
-                } else if(actionData == ActionData.CLOSE){
+                } else if (actionData == ActionData.CLOSE) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> player.closeInventory()));
@@ -111,7 +109,7 @@ public class ConfirmInventory {
         }
 
         @Override
-        public void update(Player player, InventoryContents contents){
+        public void update(Player player, InventoryContents contents) {
 
         }
 

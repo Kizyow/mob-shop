@@ -11,11 +11,11 @@ import java.util.List;
 
 public class ShopConfig extends AbstractConfig {
 
-    public ShopConfig(Plugin plugin){
+    public ShopConfig(Plugin plugin) {
         super(plugin, "shop.yml");
     }
 
-    public InventoryData getInventoryShop(){
+    public InventoryData getInventoryShop() {
 
         ConfigurationSection inventorySection = getConfig().getConfigurationSection("shop");
         String inventoryTitle = inventorySection.getString("title");
@@ -33,7 +33,7 @@ public class ShopConfig extends AbstractConfig {
         ConfigurationSection itemSection = inventorySection.getConfigurationSection("items");
         List<ItemData> itemDataList = new ArrayList<>();
 
-        for(String item : itemSection.getKeys(false)){
+        for (String item : itemSection.getKeys(false)) {
             String itemMaterial = itemSection.getString(item + ".material");
             String action = itemSection.getString(item + ".action");
             Integer itemSlot = itemSection.getInt(item + ".slot");

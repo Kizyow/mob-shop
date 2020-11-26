@@ -16,27 +16,27 @@ public class InventoryData {
         this.itemData = itemData;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public Integer getSize(){
+    public Integer getSize() {
         return size;
     }
 
-    public Integer getRow(){
+    public Integer getRow() {
         return size / 9;
     }
 
-    public Integer getColumn(){
+    public Integer getColumn() {
         return 9;
     }
 
-    public SettingData getSettingData(){
+    public SettingData getSettingData() {
         return settingData;
     }
 
-    public List<ItemData> getItems(){
+    public List<ItemData> getItems() {
         return itemData;
     }
 

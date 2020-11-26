@@ -1,12 +1,6 @@
 package fr.kizyow.mobshop.configurations;
 
 import fr.kizyow.mobshop.Plugin;
-import fr.kizyow.mobshop.datas.InventoryData;
-import fr.kizyow.mobshop.datas.ItemData;
-import org.bukkit.configuration.ConfigurationSection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MessageConfig extends AbstractConfig {
 

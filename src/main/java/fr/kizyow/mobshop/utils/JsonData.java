@@ -16,9 +16,9 @@ import java.util.Map.Entry;
 
 public class JsonData {
 
-    public static void saveData(Map<Integer, MobData> mobDataMap){
+    public static void saveData(Map<Integer, MobData> mobDataMap) {
 
-        if(mobDataMap == null) return;
+        if (mobDataMap == null) return;
 
         try {
 
@@ -38,7 +38,7 @@ public class JsonData {
 
     }
 
-    public static Map<Integer, MobData> loadData(){
+    public static Map<Integer, MobData> loadData() {
 
         try {
 
@@ -50,7 +50,7 @@ public class JsonData {
             Map<?, ?> jsonMap = gson.fromJson(reader, Map.class);
             Map<Integer, MobData> outMap = new HashMap<>();
 
-            for(Entry<?, ?> entry : jsonMap.entrySet()){
+            for (Entry<?, ?> entry : jsonMap.entrySet()) {
 
                 Integer id = Integer.valueOf(String.valueOf(entry.getKey()));
                 MobData mobData = gson.fromJson(String.valueOf(entry.getValue()), MobData.class);

@@ -18,7 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class ShopInventory {
     private final ShopManager shopManager;
     private final InventoryData inventoryData;
 
-    public ShopInventory(Plugin plugin, EntityType entityType){
+    public ShopInventory(Plugin plugin, EntityType entityType) {
         this.plugin = plugin;
         this.entityType = entityType;
         this.shopManager = plugin.getShopManager();
@@ -37,7 +36,7 @@ public class ShopInventory {
 
     }
 
-    public SmartInventory getInventory(){
+    public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
                 .provider(new Provider(inventoryData.getSettingData(), entityType, inventoryData.getItems(), shopManager))
@@ -53,7 +52,7 @@ public class ShopInventory {
         private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
 
-        public Provider(SettingData settingData, EntityType entityType, List<ItemData> itemDataList, ShopManager shopManager){
+        public Provider(SettingData settingData, EntityType entityType, List<ItemData> itemDataList, ShopManager shopManager) {
             this.settingData = settingData;
             this.entityType = entityType;
             this.itemDataList = itemDataList;
@@ -61,19 +60,19 @@ public class ShopInventory {
         }
 
         @Override
-        public void init(Player player, InventoryContents contents){
+        public void init(Player player, InventoryContents contents) {
 
             Pagination pagination = contents.pagination();
             List<ClickableItem> itemList = new ArrayList<>();
 
-            for(Map.Entry<Integer, MobData> entry : shopManager.getMobDataMap().entrySet()){
+            for (Map.Entry<Integer, MobData> entry : shopManager.getMobDataMap().entrySet()) {
 
                 Integer id = entry.getKey();
                 MobData mobData = entry.getValue();
 
                 EntityType mobType = mobData.getEntityType();
 
-                if(entityType == mobType){
+                if (entityType == mobType) {
                     OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
                     double price = mobData.getPrice();
                     List<String> loreClone = new ArrayList<>(settingData.getLore());
@@ -86,7 +85,7 @@ public class ShopInventory {
                         shopManager.confirmItem(itemStack, player, entityType);
                     });
 
-                    if(!shopManager.checkTimeLeft(id)){
+                    if (!shopManager.checkTimeLeft(id)) {
                         itemList.add(item);
                     }
 
@@ -100,25 +99,25 @@ public class ShopInventory {
             pagination.setItems(items);
             pagination.setItemsPerPage(settingData.getItemPerPage());
 
-            for(ItemData itemData : itemDataList){
+            for (ItemData itemData : itemDataList) {
 
                 ActionData actionData = itemData.getAction();
                 ItemStack itemStack = itemData.getItem();
 
-                if(actionData == ActionData.PREVIOUS_PAGE){
+                if (actionData == ActionData.PREVIOUS_PAGE) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> contents.inventory().open(player, pagination.previous().getPage())));
 
-                } else if(actionData == ActionData.NEXT_PAGE){
+                } else if (actionData == ActionData.NEXT_PAGE) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> contents.inventory().open(player, pagination.next().getPage())));
 
-                } else if(actionData == ActionData.CLOSE){
+                } else if (actionData == ActionData.CLOSE) {
 
-                contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
-                        event -> player.closeInventory()));
+                    contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
+                            event -> player.closeInventory()));
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
@@ -127,14 +126,14 @@ public class ShopInventory {
 
             }
 
-            for(ClickableItem item : pagination.getPageItems()){
+            for (ClickableItem item : pagination.getPageItems()) {
                 contents.add(item);
             }
 
         }
 
         @Override
-        public void update(Player player, InventoryContents contents){
+        public void update(Player player, InventoryContents contents) {
 
         }
 

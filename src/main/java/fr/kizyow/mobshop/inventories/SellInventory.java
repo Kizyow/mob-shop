@@ -24,13 +24,13 @@ public class SellInventory {
     private final InventoryData inventoryData;
     private final Entity entity;
 
-    public SellInventory(Plugin plugin, Entity entity){
+    public SellInventory(Plugin plugin, Entity entity) {
         this.plugin = plugin;
         this.shopManager = plugin.getShopManager();
         this.entity = entity;
 
         boolean canButchered = plugin.getMobShopConfig().getButcherEntities().stream().anyMatch(type -> type == entity.getType());
-        if(canButchered){
+        if (canButchered) {
             this.inventoryData = plugin.getSellConfig().getInventoryButcheryAndShop();
         } else {
             this.inventoryData = plugin.getSellConfig().getInventoryShopOnly();
@@ -38,7 +38,7 @@ public class SellInventory {
 
     }
 
-    public SmartInventory getInventory(){
+    public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
                 .provider(new Provider(inventoryData.getItems(), shopManager, entity))
@@ -53,22 +53,22 @@ public class SellInventory {
         private final ShopManager shopManager;
         private final Entity entity;
 
-        public Provider(List<ItemData> items, ShopManager shopManager, Entity entity){
+        public Provider(List<ItemData> items, ShopManager shopManager, Entity entity) {
             this.items = items;
             this.shopManager = shopManager;
             this.entity = entity;
         }
 
         @Override
-        public void init(Player player, InventoryContents contents){
+        public void init(Player player, InventoryContents contents) {
 
-            for(ItemData itemData : items){
+            for (ItemData itemData : items) {
 
                 EntityType entityType = entity.getType();
                 ActionData actionData = itemData.getAction();
                 ItemStack itemStack = itemData.getItem(entityType);
 
-                if(actionData == ActionData.SELL_BUTCHER){
+                if (actionData == ActionData.SELL_BUTCHER) {
                     double priceButcher = shopManager.generatePriceButcher(entityType);
                     ItemConverter.replacePriceTag(itemStack, priceButcher);
 
@@ -78,7 +78,7 @@ public class SellInventory {
                                 player.closeInventory();
                             }));
 
-                } else if(actionData == ActionData.SELL_SHOP){
+                } else if (actionData == ActionData.SELL_SHOP) {
                     double priceShop = shopManager.generatePriceShop(entityType);
                     ItemConverter.replacePriceTag(itemStack, priceShop);
 
@@ -88,7 +88,7 @@ public class SellInventory {
                                 player.closeInventory();
                             }));
 
-                } else if(actionData == ActionData.CLOSE){
+                } else if (actionData == ActionData.CLOSE) {
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> player.closeInventory()));
@@ -102,7 +102,7 @@ public class SellInventory {
         }
 
         @Override
-        public void update(Player player, InventoryContents contents){
+        public void update(Player player, InventoryContents contents) {
 
         }
 

@@ -13,49 +13,49 @@ public class MobData {
     private final double price;
     private final long expireAt;
 
-    public MobData(EntityType entityType, UUID uuid, double price){
+    public MobData(EntityType entityType, UUID uuid, double price) {
         this.entityType = entityType;
         this.uuid = uuid;
         this.price = price;
         this.expireAt = System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 7);
     }
 
-    public EntityType getEntityType(){
+    public EntityType getEntityType() {
         return entityType;
     }
 
-    public UUID getUUID(){
+    public UUID getUUID() {
         return uuid;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return price;
     }
 
-    public long getExpireAt(){
+    public long getExpireAt() {
         return expireAt;
     }
 
-    public String getTimeLeft(){
+    public String getTimeLeft() {
 
         long timeLeft = (expireAt - System.currentTimeMillis()) / 1000;
         int days = 0;
         int hours = 0;
         int minutes = 0;
 
-        while(timeLeft >= TimeUnit.DAY.getToSecond()){
+        while (timeLeft >= TimeUnit.DAY.getToSecond()) {
             days++;
             timeLeft -= TimeUnit.DAY.getToSecond();
 
         }
 
-        while(timeLeft >= TimeUnit.HOUR.getToSecond()){
+        while (timeLeft >= TimeUnit.HOUR.getToSecond()) {
             hours++;
             timeLeft -= TimeUnit.HOUR.getToSecond();
 
         }
 
-        while(timeLeft >= TimeUnit.MINUTE.getToSecond()){
+        while (timeLeft >= TimeUnit.MINUTE.getToSecond()) {
             minutes++;
             timeLeft -= TimeUnit.MINUTE.getToSecond();
 
@@ -68,14 +68,4 @@ public class MobData {
 
     }
 
-
-
-    @Override
-    public String toString() {
-        return "MobData{" +
-                "entityType=" + entityType +
-                ", uuid=" + uuid +
-                ", price=" + price +
-                '}';
-    }
 }

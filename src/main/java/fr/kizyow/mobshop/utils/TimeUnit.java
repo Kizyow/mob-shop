@@ -14,7 +14,7 @@ public enum TimeUnit {
 
     private static final HashMap<String, TimeUnit> ID_SHORTCUT = new HashMap<>();
 
-    TimeUnit(String name, String shortcut, long toSecond){
+    TimeUnit(String name, String shortcut, long toSecond) {
         this.name = name;
         this.shortcut = shortcut;
         this.toSecond = toSecond;
@@ -23,7 +23,7 @@ public enum TimeUnit {
 
     static {
 
-        for(TimeUnit units : values()){
+        for (TimeUnit units : values()) {
 
             ID_SHORTCUT.put(units.shortcut, units);
 
@@ -31,27 +31,27 @@ public enum TimeUnit {
 
     }
 
-    public static TimeUnit getFromShortcut(String shortcut){
+    public static TimeUnit getFromShortcut(String shortcut) {
         return ID_SHORTCUT.get(shortcut);
 
     }
 
-    public String getName(){
+    public String getName() {
         return name;
 
     }
 
-    public String getShortcut(){
+    public String getShortcut() {
         return shortcut;
 
     }
 
-    public long getToSecond(){
+    public long getToSecond() {
         return toSecond;
 
     }
 
-    public static boolean existFromShortcut(String shortcut){
+    public static boolean existFromShortcut(String shortcut) {
         return ID_SHORTCUT.containsKey(shortcut);
 
     }

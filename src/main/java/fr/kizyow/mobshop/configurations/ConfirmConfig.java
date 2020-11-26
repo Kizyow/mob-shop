@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ConfirmConfig extends AbstractConfig {
 
-    public ConfirmConfig(Plugin plugin){
+    public ConfirmConfig(Plugin plugin) {
         super(plugin, "confirm.yml");
     }
 
-    public InventoryData getInventoryConfirm(){
+    public InventoryData getInventoryConfirm() {
 
         ConfigurationSection inventorySection = getConfig().getConfigurationSection("confirm");
         String inventoryTitle = inventorySection.getString("title");
@@ -23,7 +23,7 @@ public class ConfirmConfig extends AbstractConfig {
         ConfigurationSection itemSection = inventorySection.getConfigurationSection("items");
         List<ItemData> itemDataList = new ArrayList<>();
 
-        for(String item : itemSection.getKeys(false)){
+        for (String item : itemSection.getKeys(false)) {
             String itemMaterial = itemSection.getString(item + ".material");
             String action = itemSection.getString(item + ".action");
             Integer itemSlot = itemSection.getInt(item + ".slot");

@@ -10,7 +10,7 @@ import java.util.List;
 public class ItemComparator implements Comparator<ClickableItem> {
 
     @Override
-    public int compare(ClickableItem clickableItem1, ClickableItem clickableItem2){
+    public int compare(ClickableItem clickableItem1, ClickableItem clickableItem2) {
 
 
         List<String> lore1 = clickableItem1.getItem().getItemMeta().getLore();

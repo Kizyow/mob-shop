@@ -21,25 +21,25 @@ public class ShopManager {
     private final Map<Integer, MobData> mobDataMap;
     private Integer mobId = 0;
 
-    public ShopManager(Plugin plugin){
+    public ShopManager(Plugin plugin) {
         this.plugin = plugin;
         this.mobDataMap = JsonData.loadData();
 
-        if(!mobDataMap.isEmpty()){
+        if (!mobDataMap.isEmpty()) {
             mobId = Collections.max(mobDataMap.keySet()) + 1;
         }
 
     }
 
-    public boolean checkTimeLeft(Integer id){
+    public boolean checkTimeLeft(Integer id) {
         MobData mobData = mobDataMap.get(id);
         boolean timeOut = (mobData.getExpireAt() - System.currentTimeMillis()) < 0;
 
-        if(timeOut){
+        if (timeOut) {
             OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
             plugin.getEconomy().depositPlayer(author, mobData.getPrice() / 2);
 
-            if(author.isOnline()){
+            if (author.isOnline()) {
                 Player authorPlayer = author.getPlayer();
                 String message = plugin.getMessageConfig().getTimeOut();
                 message = MessageConverter.convert(message, mobData.getEntityType(), mobData.getPrice(), author);
@@ -55,9 +55,9 @@ public class ShopManager {
 
     }
 
-    public Double generatePriceButcher(EntityType type){
+    public Double generatePriceButcher(EntityType type) {
         boolean isPresent = plugin.getMobShopConfig().getButcherEntities().stream().anyMatch(t -> t == type);
-        if(!isPresent){
+        if (!isPresent) {
             return 0.0;
         }
 
@@ -69,9 +69,9 @@ public class ShopManager {
         return random.nextBoolean() ? price + variation : price - variation;
     }
 
-    public Double generatePriceShop(EntityType type){
+    public Double generatePriceShop(EntityType type) {
         boolean isPresent = plugin.getMobShopConfig().getShopEntities().stream().anyMatch(t -> t == type);
-        if(!isPresent){
+        if (!isPresent) {
             return 0.0;
         }
 
@@ -83,7 +83,7 @@ public class ShopManager {
         return random.nextBoolean() ? price + variation : price - variation;
     }
 
-    public void sellMobButcher(Entity entity, double price, Player player){
+    public void sellMobButcher(Entity entity, double price, Player player) {
         plugin.getEconomy().depositPlayer(player, price);
         String message = plugin.getMessageConfig().getMobSoldButcher();
         message = MessageConverter.convert(message, entity.getType(), price, player);
@@ -91,7 +91,7 @@ public class ShopManager {
         entity.remove();
     }
 
-    public void sellMobShop(Entity entity, double price, Player player){
+    public void sellMobShop(Entity entity, double price, Player player) {
         MobData mobData = new MobData(entity.getType(), player.getUniqueId(), price);
         mobDataMap.put(mobId++, mobData);
         String message = plugin.getMessageConfig().getMobSoldShop();
@@ -100,14 +100,14 @@ public class ShopManager {
         entity.remove();
     }
 
-    public void confirmItem(ItemStack itemStack, Player player, EntityType entityType){
+    public void confirmItem(ItemStack itemStack, Player player, EntityType entityType) {
 
         List<String> lore = itemStack.getItemMeta().getLore();
         String idRaw = lore.get(lore.size() - 1);
         Integer id = Integer.valueOf(idRaw.split(" ")[1]);
 
-        if(alreadyBuy(player, id, entityType)) return;
-        if(!player.getWorld().getName().equalsIgnoreCase("world")){
+        if (alreadyBuy(player, id, entityType)) return;
+        if (!player.getWorld().getName().equalsIgnoreCase("world")) {
             String message = plugin.getMessageConfig().getErrorWrongWorld();
             message = MessageConverter.convert(message, entityType, 0, player);
             player.sendMessage(message);
@@ -119,9 +119,9 @@ public class ShopManager {
 
     }
 
-    public void buyMob(Player player, Integer id, EntityType entityType){
+    public void buyMob(Player player, Integer id, EntityType entityType) {
 
-        if(alreadyBuy(player, id, entityType)) return;
+        if (alreadyBuy(player, id, entityType)) return;
 
         MobData mobData = mobDataMap.get(id);
         double economy = plugin.getEconomy().getBalance(player);
@@ -129,7 +129,7 @@ public class ShopManager {
         OfflinePlayer author = Bukkit.getOfflinePlayer(mobData.getUUID());
         double price = mobData.getPrice();
 
-        if(economy < price){
+        if (economy < price) {
             String message = plugin.getMessageConfig().getErrorInsufficientFounds();
             message = MessageConverter.convert(message, entityType, price, player);
             player.sendMessage(message);
@@ -146,7 +146,7 @@ public class ShopManager {
         message = MessageConverter.convert(message, entityType, price, author);
         player.sendMessage(message);
 
-        if(author.isOnline()){
+        if (author.isOnline()) {
             Player authorPlayer = author.getPlayer();
             message = plugin.getMessageConfig().getSellerBuyMob();
             message = MessageConverter.convert(message, entityType, price, player);
@@ -162,9 +162,9 @@ public class ShopManager {
 
     }
 
-    private boolean alreadyBuy(Player player, Integer id, EntityType entityType){
+    private boolean alreadyBuy(Player player, Integer id, EntityType entityType) {
 
-        if(!mobDataMap.containsKey(id)) {
+        if (!mobDataMap.containsKey(id)) {
             ShopInventory shopInventory = new ShopInventory(plugin, entityType);
             shopInventory.getInventory().open(player);
             String message = plugin.getMessageConfig().getErrorMobAlreadyBought();
@@ -178,7 +178,7 @@ public class ShopManager {
 
     }
 
-    public Map<Integer, MobData> getMobDataMap(){
+    public Map<Integer, MobData> getMobDataMap() {
         return mobDataMap;
     }
 

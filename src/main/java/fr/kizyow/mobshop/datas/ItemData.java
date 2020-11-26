@@ -15,7 +15,7 @@ public class ItemData {
     private final String title;
     private final List<String> lore;
 
-    public ItemData(String stringMaterial, String action, Integer slot, String title, List<String> lore){
+    public ItemData(String stringMaterial, String action, Integer slot, String title, List<String> lore) {
         this.stringMaterial = stringMaterial;
         this.action = action;
         this.slot = slot;
@@ -23,43 +23,43 @@ public class ItemData {
         this.lore = lore;
     }
 
-    public Material getMaterial(){
+    public Material getMaterial() {
         return Material.valueOf(stringMaterial);
     }
 
-    public ActionData getAction(){
+    public ActionData getAction() {
         return ActionData.getAction(action);
     }
 
-    public Integer getSlot(){
+    public Integer getSlot() {
         return slot;
     }
 
-    public Integer getRow(){
+    public Integer getRow() {
         return slot / 9;
     }
 
-    public Integer getColumn(){
+    public Integer getColumn() {
         return slot % 9;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public List<String> getLore(){
+    public List<String> getLore() {
         return lore;
     }
 
-    public ItemStack getItem(EntityType entityType){
+    public ItemStack getItem(EntityType entityType) {
         return ItemConverter.getItem(stringMaterial, title, lore, entityType, false);
     }
 
-    public ItemStack getItem(){
+    public ItemStack getItem() {
         return getItem(null);
     }
 
-    public ItemStack getPredefinedItem(ItemStack itemStack, EntityType entityType){
+    public ItemStack getPredefinedItem(ItemStack itemStack, EntityType entityType) {
         return ItemConverter.getPredefinedItem(itemStack, title, lore, entityType);
     }
 

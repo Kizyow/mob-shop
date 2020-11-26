@@ -8,30 +8,25 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
-import fr.minuskube.inv.content.Pagination;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CategoryInventory {
 
     private final Plugin plugin;
     private final InventoryData inventoryData;
 
-    public CategoryInventory(Plugin plugin){
+    public CategoryInventory(Plugin plugin) {
         this.plugin = plugin;
         this.inventoryData = plugin.getCategoryConfig().getInventoryCategory();
 
     }
 
-    public SmartInventory getInventory(){
+    public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
                 .provider(new Provider(inventoryData.getSettingData(), inventoryData.getItems(), plugin))
@@ -46,32 +41,32 @@ public class CategoryInventory {
         private final List<ItemData> itemDataList;
         private final Plugin plugin;
 
-        public Provider(SettingData settingData, List<ItemData> itemDataList, Plugin plugin){
+        public Provider(SettingData settingData, List<ItemData> itemDataList, Plugin plugin) {
             this.settingData = settingData;
             this.itemDataList = itemDataList;
             this.plugin = plugin;
         }
 
         @Override
-        public void init(Player player, InventoryContents contents){
+        public void init(Player player, InventoryContents contents) {
 
-            for(ItemData itemData : itemDataList){
+            for (ItemData itemData : itemDataList) {
 
                 ItemStack itemStack = itemData.getItem();
                 ActionData actionData = itemData.getAction();
 
-                 if(actionData == ActionData.CLOSE){
+                if (actionData == ActionData.CLOSE) {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> player.closeInventory()));
 
                 } else {
-                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+                    contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
 
-                 }
+                }
 
             }
 
-            for(EntityType entityType : plugin.getMobShopConfig().getShopEntities()){
+            for (EntityType entityType : plugin.getMobShopConfig().getShopEntities()) {
 
                 List<String> loreClone = new ArrayList<>(settingData.getLore());
                 ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType, false);
@@ -89,11 +84,11 @@ public class CategoryInventory {
         }
 
         @Override
-        public void update(Player player, InventoryContents contents){
+        public void update(Player player, InventoryContents contents) {
 
         }
 
-        private Integer countMob(EntityType entityType){
+        private Integer countMob(EntityType entityType) {
 
             ShopManager shopManager = plugin.getShopManager();
             return Math.toIntExact(shopManager.getMobDataMap()

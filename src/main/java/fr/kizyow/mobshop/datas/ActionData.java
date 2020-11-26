@@ -14,18 +14,18 @@ public enum ActionData {
 
     private final String name;
 
-    ActionData(String name){
+    ActionData(String name) {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public static ActionData getAction(String name){
+    public static ActionData getAction(String name) {
 
-        for(ActionData actionData : values()){
-            if(actionData.getName().equalsIgnoreCase(name)){
+        for (ActionData actionData : values()) {
+            if (actionData.getName().equalsIgnoreCase(name)) {
                 return actionData;
             }
 

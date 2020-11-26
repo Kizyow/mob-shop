@@ -7,17 +7,16 @@ import org.bukkit.entity.EntityType;
 
 public class MessageConverter {
 
-    public static String convert(String message, EntityType type, double price, OfflinePlayer buyer){
+    public static String convert(String message, EntityType type, double price, OfflinePlayer buyer) {
 
 
-
-        if(type != null){
+        if (type != null) {
             String entityNameShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesName().get(type);
             message = message.replace("<entity_name>", entityNameShop);
             message = message.replace("<entity_type>", type.name());
         }
 
-        if(buyer != null) {
+        if (buyer != null) {
             message = message.replace("<buyer>", buyer.getName());
         }
 
