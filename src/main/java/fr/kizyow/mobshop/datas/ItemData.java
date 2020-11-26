@@ -52,11 +52,15 @@ public class ItemData {
     }
 
     public ItemStack getItem(EntityType entityType){
-        return ItemConverter.getItem(stringMaterial, title, lore, entityType);
+        return ItemConverter.getItem(stringMaterial, title, lore, entityType, false);
     }
 
     public ItemStack getItem(){
-        return ItemConverter.getItem(stringMaterial, title, lore, null);
+        return getItem(null);
+    }
+
+    public ItemStack getPredefinedItem(ItemStack itemStack, EntityType entityType){
+        return ItemConverter.getPredefinedItem(itemStack, title, lore, entityType);
     }
 
 }

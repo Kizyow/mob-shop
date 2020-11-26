@@ -8,13 +8,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ItemConverter {
 
-    public static ItemStack getItem(String strMaterial, String title, List<String> lore, EntityType entityType){
+    public static ItemStack getPredefinedItem(ItemStack itemStack, String title, List<String> lore, EntityType entityType){
+        customMeta(itemStack, title, lore, entityType);
+        return itemStack;
 
-        ItemStack itemStack = customHead(entityType, strMaterial);
+    }
+
+    public static ItemStack getItem(String strMaterial, String title, List<String> lore, EntityType entityType, boolean random){
+
+        ItemStack itemStack = customHead(entityType, strMaterial, random);
         if(itemStack == null){
             Material material = Material.valueOf(strMaterial);
             itemStack = new ItemStack(material);
@@ -95,7 +102,7 @@ public class ItemConverter {
         }
 
         String entityNameShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesName().get(entityType);
-        String entityHeadShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
+        List<String> entityHeadShop = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
         String entityNameButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesName().get(entityType);
         String entityHeadButcher = Plugin.getInstance().getMobShopConfig().getButcherEntitiesHead().get(entityType);
 
@@ -105,19 +112,31 @@ public class ItemConverter {
         }
 
         string = string.replace("<entity_name_shop>", entityNameShop);
-        string = string.replace("<entity_head_shop>", entityHeadShop);
+        string = string.replace("<entity_head_shop>", entityHeadShop.get(0));
         string = string.replace("<entity_type>", entityType.name());
 
         return string;
 
     }
 
-    private static ItemStack customHead(EntityType entityType, String material){
+    private static ItemStack customHead(EntityType entityType, String material, boolean random){
 
         String data = "";
 
         if(material.equalsIgnoreCase("<entity_head_shop>")){
-            data = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
+
+            List<String> dataHead = Plugin.getInstance().getMobShopConfig().getShopEntitiesHead().get(entityType);
+
+
+            if(random){
+                Random random1 = new Random();
+                int select = random1.nextInt(dataHead.size());
+                data = dataHead.get(select);
+            } else {
+                data = dataHead.get(0);
+
+            }
+
         } else if(material.equalsIgnoreCase("<entity_head_butcher>")){
             data = Plugin.getInstance().getMobShopConfig().getButcherEntitiesHead().get(entityType);
         } else if(material.startsWith("hdb-")){

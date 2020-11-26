@@ -9,6 +9,7 @@ public enum ActionData {
     NEXT_PAGE("next_page"),
     CONFIRM("confirm"),
     REFUSE("refuse"),
+    PREDEFINE("predefine"),
     CLOSE("close");
 
     private final String name;

@@ -19,13 +19,15 @@ import java.util.List;
 public class ConfirmInventory {
 
     private final Plugin plugin;
+    private final ItemStack item;
     private final Integer id;
 
     private final ShopManager shopManager;
     private final InventoryData inventoryData;
 
-    public ConfirmInventory(Plugin plugin, Integer id){
+    public ConfirmInventory(Plugin plugin, ItemStack item, Integer id){
         this.plugin = plugin;
+        this.item = item;
         this.id = id;
         this.shopManager = plugin.getShopManager();
         this.inventoryData = plugin.getConfirmConfig().getInventoryConfirm();
@@ -35,7 +37,7 @@ public class ConfirmInventory {
     public SmartInventory getInventory(){
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(plugin, id, inventoryData.getItems(), shopManager))
+                .provider(new Provider(plugin, item, id, inventoryData.getItems(), shopManager))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -44,12 +46,14 @@ public class ConfirmInventory {
     static class Provider implements InventoryProvider {
 
         private final Plugin plugin;
+        private final ItemStack item;
         private final Integer id;
         private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
 
-        public Provider(Plugin plugin, Integer id, List<ItemData> itemDataList, ShopManager shopManager){
+        public Provider(Plugin plugin, ItemStack item, Integer id, List<ItemData> itemDataList, ShopManager shopManager){
             this.plugin = plugin;
+            this.item = item;
             this.id = id;
             this.itemDataList = itemDataList;
             this.shopManager = shopManager;
@@ -70,7 +74,14 @@ public class ConfirmInventory {
                 ItemStack itemStack = itemData.getItem(entityType);
                 ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
-                if(actionData == ActionData.CONFIRM){
+                if(actionData == ActionData.PREDEFINE){
+
+                    itemStack = itemData.getPredefinedItem(item, entityType);
+                    ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
+
+                    contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+
+                } else if(actionData == ActionData.CONFIRM){
 
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.of(itemStack,
                             event -> {

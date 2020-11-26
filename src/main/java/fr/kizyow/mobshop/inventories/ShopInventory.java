@@ -79,7 +79,7 @@ public class ShopInventory {
                     List<String> loreClone = new ArrayList<>(settingData.getLore());
                     loreClone.add(ChatColor.DARK_GRAY + "ID: " + id);
 
-                    ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
+                    ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType, true);
                     ItemConverter.replaceShopTag(itemStack, author.getName(), price, mobData.getTimeLeft());
 
                     ClickableItem item = ClickableItem.of(itemStack, event -> {

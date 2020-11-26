@@ -20,10 +20,15 @@ entity-name-shop:
 
 # La tête correspondant à chaque entité
 entity-head-shop:
-  pig: hdb-14201
-  chicken: hdb-659
-  cow: hdb-29769
-  sheep: hdb-7733
+  pig:
+    - hdb-14201
+  chicken:
+    - hdb-659
+    - hdb-35652
+  cow:
+    - hdb-29769
+  sheep:
+    - hdb-7733
 
 # Le prix de chaque entité
 entity-price-shop:

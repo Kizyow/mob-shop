@@ -74,7 +74,7 @@ public class CategoryInventory {
             for(EntityType entityType : plugin.getMobShopConfig().getShopEntities()){
 
                 List<String> loreClone = new ArrayList<>(settingData.getLore());
-                ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType);
+                ItemStack itemStack = ItemConverter.getItem(settingData.getMaterial(), settingData.getTitle(), loreClone, entityType, false);
                 ItemConverter.replaceOfferTag(itemStack, countMob(entityType));
 
                 ClickableItem item = ClickableItem.of(itemStack, event -> {

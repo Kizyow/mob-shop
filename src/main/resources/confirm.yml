@@ -12,6 +12,7 @@ confirm:
     entity_head:
       material: "<entity_head_shop>"
       slot: 1
+      action: "predefine"
       title: "<entity_name_shop>"
       lore:
         - "Price: <entity_price_shop>"
@@ -65,3 +66,4 @@ confirm:
 # - confirm (Accepter)
 # - refuse (Refuser)
 # - close (Fermer l'inventaire)
+# - predefine (Prend la même texture)

@@ -114,7 +114,7 @@ public class ShopManager {
             return;
         }
 
-        ConfirmInventory confirmInventory = new ConfirmInventory(plugin, id);
+        ConfirmInventory confirmInventory = new ConfirmInventory(plugin, itemStack, id);
         confirmInventory.getInventory().open(player);
 
     }

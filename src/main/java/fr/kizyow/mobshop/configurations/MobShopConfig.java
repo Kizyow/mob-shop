@@ -39,14 +39,14 @@ public class MobShopConfig {
         return outMap;
     }
 
-    public Map<EntityType, String> getShopEntitiesHead(){
+    public Map<EntityType, List<String>> getShopEntitiesHead(){
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("entity-head-shop");
-        Map<EntityType, String> outMap = new HashMap<>();
+        Map<EntityType, List<String>> outMap = new HashMap<>();
         Map<String, Object> values = section.getValues(true);
 
         for(Map.Entry<String, Object> entry : values.entrySet()){
             EntityType entityType = EntityType.valueOf(entry.getKey().toUpperCase());
-            String headString = (String) entry.getValue();
+            List<String> headString = (List<String>) entry.getValue();
             outMap.put(entityType, headString);
 
         }
