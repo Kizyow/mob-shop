@@ -59,7 +59,6 @@ butchery-and-shop:
         - 13
         - 14
         - 16
-        - 17
 
 # L'inventaire qui correspond à la vente UNIQUEMENT au shop
 shop-only:

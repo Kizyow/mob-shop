@@ -42,22 +42,18 @@ price-variation-shop: 10
 # Les entités qui peuvent être vendus à la boucherie
 entity-sell-butcher:
   - PIG
-  - CHICKEN
 
 # Le nom correspondant à chaque entité
 entity-name-butcher:
   pig: "Cochon"
-  chicken: "Poulet"
 
 # La tête correspondant à chaque entité
 entity-head-butcher:
   pig: hdb-26071
-  chicken: hdb-33798
 
 # Le prix de chaque entité
 entity-price-butcher:
   pig: 2.5
-  chicken: 5
 
 # La variation du prix (en %)
 price-variation-butcher: 10
