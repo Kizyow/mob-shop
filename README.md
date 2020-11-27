@@ -32,4 +32,4 @@ Coming soon!
   Coming soon!
 
 ## Problems:
-If you have somes issues with the API or if you have an idea, create an issue [here](https://github.com/Kizyow/mob-shop/issues)
+If you have somes issues with the plugin or if you have an idea, create an issue [here](https://github.com/Kizyow/mob-shop/issues)
