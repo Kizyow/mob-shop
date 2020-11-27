@@ -16,16 +16,16 @@ public class MobShopCommand implements CommandExecutor, TabExecutor {
 
     private final Plugin plugin;
 
-    public MobShopCommand(Plugin plugin){
+    public MobShopCommand(Plugin plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if(args.length == 0){
+        if (args.length == 0) {
 
-            if(sender instanceof Player){
+            if (sender instanceof Player) {
 
                 Player player = (Player) sender;
 
@@ -36,11 +36,11 @@ public class MobShopCommand implements CommandExecutor, TabExecutor {
 
         }
 
-        if(args.length >= 1 && sender.isOp()){
+        if (args.length >= 1 && sender.isOp()) {
 
             String subCommand = args[0];
 
-            if(subCommand.equalsIgnoreCase("reload")){
+            if (subCommand.equalsIgnoreCase("reload")) {
                 plugin.reloadConfig();
                 plugin.getSellConfig().reloadConfig();
                 plugin.getShopConfig().reloadConfig();
@@ -58,9 +58,9 @@ public class MobShopCommand implements CommandExecutor, TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args){
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
-        if(args.length >= 1 && sender.isOp()){
+        if (args.length >= 1 && sender.isOp()) {
             return Collections.singletonList("reload");
         }
 

@@ -8,34 +8,27 @@
 entity-sell-shop:
   - PIG
   - CHICKEN
-  - COW
-  - SHEEP
 
 # Le nom correspondant à chaque entité
 entity-name-shop:
   pig: "Cochon"
   chicken: "Poulet"
-  cow: "Vache"
-  sheep: "Mouton"
 
 # La tête correspondant à chaque entité
+# Note: Tu peux mettre plusieurs tête par mob, dans la boutique ca prendra aléatoirement.
+#       En revanche pour tout le reste, ca prendra la première tête mise dans la liste !
 entity-head-shop:
   pig:
     - hdb-14201
+    - hdb-38574
   chicken:
     - hdb-659
     - hdb-35652
-  cow:
-    - hdb-29769
-  sheep:
-    - hdb-7733
 
 # Le prix de chaque entité
 entity-price-shop:
   pig: 5
   chicken: 10
-  cow: 15
-  sheep: 20
 
 # La variation du prix (en %)
 price-variation-shop: 10

@@ -109,7 +109,7 @@ public class ShopManager {
         Integer id = Integer.valueOf(idRaw.split(" ")[1]);
 
         if (alreadyBuy(player, id, entityType)) return;
-        if (!player.getWorld().getName().equalsIgnoreCase("world")) {
+        if (!player.getWorld().getName().equalsIgnoreCase("survie")) {
             String message = plugin.getMessageConfig().getErrorWrongWorld();
             message = MessageConverter.convert(message, entityType, 0, player);
             player.sendMessage(message);
@@ -148,7 +148,7 @@ public class ShopManager {
         message = MessageConverter.convert(message, entityType, price, author);
         player.sendMessage(message);
 
-        if (author.isOnline()){
+        if (author.isOnline()) {
             Player authorPlayer = author.getPlayer();
             message = plugin.getMessageConfig().getSellerBuyMob();
             message = MessageConverter.convert(message, entityType, price, player);
@@ -156,7 +156,7 @@ public class ShopManager {
             authorPlayer.playSound(authorPlayer.getLocation(), "entity." + entityType.getKey().getKey() + ".ambient", 1.0F, 1.0F);
         } else {
 
-            if(!dataOfflinePlayer.containsKey(author.getUniqueId())){
+            if (!dataOfflinePlayer.containsKey(author.getUniqueId())) {
                 dataOfflinePlayer.put(author.getUniqueId(), new ArrayList<>());
             }
 

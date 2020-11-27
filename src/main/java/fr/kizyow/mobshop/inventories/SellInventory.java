@@ -2,6 +2,7 @@ package fr.kizyow.mobshop.inventories;
 
 import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.ActionData;
+import fr.kizyow.mobshop.datas.DecorativeData;
 import fr.kizyow.mobshop.datas.InventoryData;
 import fr.kizyow.mobshop.datas.ItemData;
 import fr.kizyow.mobshop.managers.ShopManager;
@@ -41,7 +42,7 @@ public class SellInventory {
     public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(inventoryData.getItems(), shopManager, entity))
+                .provider(new Provider(inventoryData, shopManager, entity))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -50,11 +51,13 @@ public class SellInventory {
     static class Provider implements InventoryProvider {
 
         private final List<ItemData> items;
+        private final List<DecorativeData> decorativeData;
         private final ShopManager shopManager;
         private final Entity entity;
 
-        public Provider(List<ItemData> items, ShopManager shopManager, Entity entity) {
-            this.items = items;
+        public Provider(InventoryData inventoryData, ShopManager shopManager, Entity entity) {
+            this.items = inventoryData.getItems();
+            this.decorativeData = inventoryData.getDecorativeData();
             this.shopManager = shopManager;
             this.entity = entity;
         }
@@ -95,6 +98,21 @@ public class SellInventory {
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+                }
+
+            }
+
+            for (DecorativeData decorative : decorativeData) {
+
+                ItemStack itemStack = decorative.getItem();
+
+                for (Integer slot : decorative.getSlots()) {
+
+                    int row = slot / 9;
+                    int column = slot % 9;
+
+                    contents.set(row, column, ClickableItem.empty(itemStack));
+
                 }
 
             }

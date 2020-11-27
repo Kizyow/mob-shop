@@ -6,57 +6,42 @@
 
 # L'inventaire qui correspond à l'achat
 shop:
-  title: "Shop"
+  title: "Boutique"
   size: 54
   settings:
     material: "<entity_head_shop>"
-    title: "<entity_name_shop>"
+    title: "&e<entity_name_shop>"
     lore:
-      - "Price: <entity_price_shop>"
-      - "Author: <author>"
-      - "Expire at <expire_at>"
+      - "&8Prix: &6<entity_price_shop>$"
+      - "&8Vendeur: &6<author>"
+      - "&8Expire dans &6<expire_at>"
     item-per-page: 45
   items:
     arrow_back:
       material: hdb-9219
       action: "previous_page"
       slot: 45
-      title: "Previous page"
-      lore: []
+      title: "Page précédente"
+      lore: [ ]
     arrow_next:
       material: hdb-9217
       action: "next_page"
       slot: 53
-      title: "Next page"
-      lore: []
-    glass1:
+      title: "Page suivante"
+      lore: [ ]
+  decorative:
+    white_glass:
       material: WHITE_STAINED_GLASS_PANE
-      slot: 46
-      title: ""
-    glass2:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 47
-      title: ""
-    glass3:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 48
-      title: ""
-    glass4:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 49
-      title: ""
-    glass5:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 50
-      title: ""
-    glass6:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 51
-      title: ""
-    glass7:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 52
-      title: ""
+      title: ' '
+      lore: [ ]
+      slots:
+        - 46
+        - 47
+        - 48
+        - 49
+        - 50
+        - 51
+        - 52
 
 # Balises disponible :
 # - <entity_name_shop>

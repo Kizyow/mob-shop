@@ -8,12 +8,14 @@ public class InventoryData {
     private final Integer size;
     private final SettingData settingData;
     private final List<ItemData> itemData;
+    private final List<DecorativeData> decorativeData;
 
-    public InventoryData(String title, Integer size, SettingData settingData, List<ItemData> itemData) {
+    public InventoryData(String title, Integer size, SettingData settingData, List<ItemData> itemData, List<DecorativeData> decorativeData) {
         this.title = title;
         this.size = size;
         this.settingData = settingData;
         this.itemData = itemData;
+        this.decorativeData = decorativeData;
     }
 
     public String getTitle() {
@@ -38,6 +40,10 @@ public class InventoryData {
 
     public List<ItemData> getItems() {
         return itemData;
+    }
+
+    public List<DecorativeData> getDecorativeData() {
+        return decorativeData;
     }
 
 }

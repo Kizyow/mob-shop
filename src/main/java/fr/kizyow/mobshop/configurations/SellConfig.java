@@ -1,6 +1,7 @@
 package fr.kizyow.mobshop.configurations;
 
 import fr.kizyow.mobshop.Plugin;
+import fr.kizyow.mobshop.datas.DecorativeData;
 import fr.kizyow.mobshop.datas.InventoryData;
 import fr.kizyow.mobshop.datas.ItemData;
 import org.bukkit.configuration.ConfigurationSection;
@@ -35,7 +36,21 @@ public class SellConfig extends AbstractConfig {
 
         }
 
-        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList);
+        ConfigurationSection decorativeSection = inventorySection.getConfigurationSection("decorative");
+        List<DecorativeData> decorativeDataList = new ArrayList<>();
+
+        for (String item : decorativeSection.getKeys(false)) {
+            String itemMaterial = decorativeSection.getString(item + ".material");
+            String itemTitle = decorativeSection.getString(item + ".title");
+            List<String> itemLore = decorativeSection.getStringList(item + ".lore");
+            List<Integer> itemSlots = decorativeSection.getIntegerList(item + ".slots");
+
+            DecorativeData decorativeData = new DecorativeData(itemMaterial, itemTitle, itemLore, itemSlots);
+            decorativeDataList.add(decorativeData);
+
+        }
+
+        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList, decorativeDataList);
 
     }
 
@@ -48,19 +63,37 @@ public class SellConfig extends AbstractConfig {
         ConfigurationSection itemSection = inventorySection.getConfigurationSection("items");
         List<ItemData> itemDataList = new ArrayList<>();
 
-        for (String item : itemSection.getKeys(false)) {
-            String itemMaterial = itemSection.getString(item + ".material");
-            String action = itemSection.getString(item + ".action");
-            Integer itemSlot = itemSection.getInt(item + ".slot");
-            String itemTitle = itemSection.getString(item + ".title");
-            List<String> itemLore = itemSection.getStringList(item + ".lore");
+        if (itemSection != null) {
+            for (String item : itemSection.getKeys(false)) {
+                String itemMaterial = itemSection.getString(item + ".material");
+                String action = itemSection.getString(item + ".action");
+                Integer itemSlot = itemSection.getInt(item + ".slot");
+                String itemTitle = itemSection.getString(item + ".title");
+                List<String> itemLore = itemSection.getStringList(item + ".lore");
 
-            ItemData itemData = new ItemData(itemMaterial, action, itemSlot, itemTitle, itemLore);
-            itemDataList.add(itemData);
+                ItemData itemData = new ItemData(itemMaterial, action, itemSlot, itemTitle, itemLore);
+                itemDataList.add(itemData);
 
+            }
         }
 
-        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList);
+        ConfigurationSection decorativeSection = inventorySection.getConfigurationSection("decorative");
+        List<DecorativeData> decorativeDataList = new ArrayList<>();
+
+        if (decorativeSection != null) {
+            for (String item : decorativeSection.getKeys(false)) {
+                String itemMaterial = decorativeSection.getString(item + ".material");
+                String itemTitle = decorativeSection.getString(item + ".title");
+                List<String> itemLore = decorativeSection.getStringList(item + ".lore");
+                List<Integer> itemSlots = decorativeSection.getIntegerList(item + ".slots");
+
+                DecorativeData decorativeData = new DecorativeData(itemMaterial, itemTitle, itemLore, itemSlots);
+                decorativeDataList.add(decorativeData);
+
+            }
+        }
+
+        return new InventoryData(inventoryTitle, inventorySize, null, itemDataList, decorativeDataList);
 
     }
 

@@ -17,17 +17,17 @@ public class PlayerJoinListener implements Listener {
 
     private final Plugin plugin;
 
-    public PlayerJoinListener(Plugin plugin){
+    public PlayerJoinListener(Plugin plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event){
+    public void onJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
         ShopManager shopManager = plugin.getShopManager();
 
-        if(shopManager.getDataOfflinePlayer().containsKey(player.getUniqueId())){
+        if (shopManager.getDataOfflinePlayer().containsKey(player.getUniqueId())) {
 
             String title = ChatColor.translateAlternateColorCodes('&', plugin.getMessageConfig().getPaperTitle());
             List<String> lore = shopManager.getDataOfflinePlayer().get(player.getUniqueId());

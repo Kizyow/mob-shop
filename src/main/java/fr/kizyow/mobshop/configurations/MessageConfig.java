@@ -4,47 +4,47 @@ import fr.kizyow.mobshop.Plugin;
 
 public class MessageConfig extends AbstractConfig {
 
-    public MessageConfig(Plugin plugin){
+    public MessageConfig(Plugin plugin) {
         super(plugin, "messages.yml");
     }
 
-    public String getMobSoldShop(){
+    public String getMobSoldShop() {
         return getConfig().getString("mob-sold-shop");
     }
 
-    public String getMobSoldButcher(){
+    public String getMobSoldButcher() {
         return getConfig().getString("mob-sold-butcher");
     }
 
-    public String getSellerBuyMob(){
+    public String getSellerBuyMob() {
         return getConfig().getString("seller-buy-mob");
     }
 
-    public String getBuyerBuyMob(){
+    public String getBuyerBuyMob() {
         return getConfig().getString("buyer-buy-mob");
     }
 
-    public String getErrorWrongWorld(){
+    public String getErrorWrongWorld() {
         return getConfig().getString("error-wrong-world");
     }
 
-    public String getErrorInsufficientFounds(){
+    public String getErrorInsufficientFounds() {
         return getConfig().getString("error-insufficient-funds");
     }
 
-    public String getErrorMobAlreadyBought(){
+    public String getErrorMobAlreadyBought() {
         return getConfig().getString("error-mob-already-bought");
     }
 
-    public String getTimeOut(){
+    public String getTimeOut() {
         return getConfig().getString("time-out");
     }
 
-    public String getPaperTitle(){
+    public String getPaperTitle() {
         return getConfig().getString("paper-title");
     }
 
-    public String getPaperTemplate(){
+    public String getPaperTemplate() {
         return getConfig().getString("paper-lore-template");
     }
 

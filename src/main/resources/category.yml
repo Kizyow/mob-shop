@@ -6,102 +6,42 @@
 
 # L'inventaire qui correspond à la catégorie
 category:
-  title: "Category"
+  title: "Catégorie"
   size: 36
   settings:
     material: "<entity_head_shop>"
-    title: "<entity_name_shop>"
+    title: "&6Catégorie &e<entity_name_shop>"
     lore:
-      - "Offers: <offres>"
+      - "&8Offres disponible: &6<offres>"
   items:
-    glass0:
+  decorative:
+    white_glass:
       material: WHITE_STAINED_GLASS_PANE
-      slot: 0
-      title: ""
-    glass1:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 1
-      title: ""
-    glass2:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 2
-      title: ""
-    glass3:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 3
-      title: ""
-    glass4:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 4
-      title: ""
-    glass5:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 5
-      title: ""
-    glass6:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 6
-      title: ""
-    glass7:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 7
-      title: ""
-    glass8:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 8
-      title: ""
-    glass9:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 9
-      title: ""
-    glass10:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 17
-      title: ""
-    glass11:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 18
-      title: ""
-    glass12:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 26
-      title: ""
-    glass13:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 27
-      title: ""
-    glass14:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 28
-      title: ""
-    glass15:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 29
-      title: ""
-    glass16:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 30
-      title: ""
-    glass17:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 31
-      title: ""
-    glass18:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 32
-      title: ""
-    glass19:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 33
-      title: ""
-    glass20:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 34
-      title: ""
-    glass21:
-      material: WHITE_STAINED_GLASS_PANE
-      slot: 35
-      title: ""
+      title: ' '
+      lore: [ ]
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 17
+        - 18
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 32
+        - 33
+        - 34
+        - 35
 
 # Balises disponible :
 # - <entity_name_shop>

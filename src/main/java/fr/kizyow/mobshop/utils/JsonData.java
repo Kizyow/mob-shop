@@ -2,7 +2,6 @@ package fr.kizyow.mobshop.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.MobData;
 import org.bukkit.Bukkit;
@@ -22,7 +21,13 @@ public class JsonData {
 
         try {
 
-            String path = Plugin.getInstance().getDataFolder().getPath();
+            String path = Plugin.getInstance().getDataFolder().getPath() + "\\data";
+            File directory = new File(path);
+
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
             File file = new File(path + "/mobdata.json");
             file.createNewFile();
 
@@ -42,7 +47,7 @@ public class JsonData {
 
         try {
 
-            String path = Plugin.getInstance().getDataFolder().getPath();
+            String path = Plugin.getInstance().getDataFolder().getPath() + "\\data";
 
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(path + "/mobdata.json"));
@@ -75,7 +80,13 @@ public class JsonData {
 
         try {
 
-            String path = Plugin.getInstance().getDataFolder().getPath();
+            String path = Plugin.getInstance().getDataFolder().getPath() + "\\data";
+            File directory = new File(path);
+
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
             File file = new File(path + "/playerdata.json");
             file.createNewFile();
 
@@ -95,7 +106,7 @@ public class JsonData {
 
         try {
 
-            String path = Plugin.getInstance().getDataFolder().getPath();
+            String path = Plugin.getInstance().getDataFolder().getPath() + "\\data";
 
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(path + "/playerdata.json"));
@@ -105,7 +116,8 @@ public class JsonData {
 
             for (Entry<?, ?> entry : jsonMap.entrySet()) {
 
-                Type listType = new TypeToken<List<String>>(){}.getType();
+                Type listType = new TypeToken<List<String>>() {
+                }.getType();
 
                 UUID uuid = UUID.fromString(String.valueOf(entry.getKey()));
 

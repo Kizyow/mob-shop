@@ -31,13 +31,12 @@ public class ConfirmInventory {
         this.id = id;
         this.shopManager = plugin.getShopManager();
         this.inventoryData = plugin.getConfirmConfig().getInventoryConfirm();
-
     }
 
     public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(plugin, item, id, inventoryData.getItems(), shopManager))
+                .provider(new Provider(plugin, item, id, inventoryData, shopManager))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -49,13 +48,15 @@ public class ConfirmInventory {
         private final ItemStack item;
         private final Integer id;
         private final List<ItemData> itemDataList;
+        private final List<DecorativeData> decorativeData;
         private final ShopManager shopManager;
 
-        public Provider(Plugin plugin, ItemStack item, Integer id, List<ItemData> itemDataList, ShopManager shopManager) {
+        public Provider(Plugin plugin, ItemStack item, Integer id, InventoryData inventoryData, ShopManager shopManager) {
             this.plugin = plugin;
             this.item = item;
             this.id = id;
-            this.itemDataList = itemDataList;
+            this.itemDataList = inventoryData.getItems();
+            this.decorativeData = inventoryData.getDecorativeData();
             this.shopManager = shopManager;
         }
 
@@ -101,6 +102,21 @@ public class ConfirmInventory {
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+
+                }
+
+            }
+
+            for (DecorativeData decorative : decorativeData) {
+
+                ItemStack itemStack = decorative.getItem();
+
+                for (Integer slot : decorative.getSlots()) {
+
+                    int row = slot / 9;
+                    int column = slot % 9;
+
+                    contents.set(row, column, ClickableItem.empty(itemStack));
 
                 }
 

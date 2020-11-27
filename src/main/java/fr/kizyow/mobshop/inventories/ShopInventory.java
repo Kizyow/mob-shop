@@ -39,7 +39,7 @@ public class ShopInventory {
     public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(inventoryData.getSettingData(), entityType, inventoryData.getItems(), shopManager))
+                .provider(new Provider(entityType, shopManager, inventoryData))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -47,16 +47,18 @@ public class ShopInventory {
 
     static class Provider implements InventoryProvider {
 
-        private final SettingData settingData;
         private final EntityType entityType;
-        private final List<ItemData> itemDataList;
         private final ShopManager shopManager;
+        private final SettingData settingData;
+        private final List<ItemData> itemDataList;
+        private final List<DecorativeData> decorativeData;
 
-        public Provider(SettingData settingData, EntityType entityType, List<ItemData> itemDataList, ShopManager shopManager) {
-            this.settingData = settingData;
+        public Provider(EntityType entityType, ShopManager shopManager, InventoryData inventoryData) {
             this.entityType = entityType;
-            this.itemDataList = itemDataList;
             this.shopManager = shopManager;
+            this.settingData = inventoryData.getSettingData();
+            this.itemDataList = inventoryData.getItems();
+            this.decorativeData = inventoryData.getDecorativeData();
         }
 
         @Override
@@ -121,6 +123,21 @@ public class ShopInventory {
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+
+                }
+
+            }
+
+            for (DecorativeData decorative : decorativeData) {
+
+                ItemStack itemStack = decorative.getItem();
+
+                for (Integer slot : decorative.getSlots()) {
+
+                    int row = slot / 9;
+                    int column = slot % 9;
+
+                    contents.set(row, column, ClickableItem.empty(itemStack));
 
                 }
 

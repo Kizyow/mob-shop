@@ -29,7 +29,7 @@ public class CategoryInventory {
     public SmartInventory getInventory() {
         return SmartInventory.builder()
                 .manager(plugin.getInventoryManager())
-                .provider(new Provider(inventoryData.getSettingData(), inventoryData.getItems(), plugin))
+                .provider(new Provider(inventoryData.getSettingData(), inventoryData, plugin))
                 .size(inventoryData.getRow(), inventoryData.getColumn())
                 .title(inventoryData.getTitle())
                 .build();
@@ -39,11 +39,13 @@ public class CategoryInventory {
 
         private final SettingData settingData;
         private final List<ItemData> itemDataList;
+        private final List<DecorativeData> decorativeData;
         private final Plugin plugin;
 
-        public Provider(SettingData settingData, List<ItemData> itemDataList, Plugin plugin) {
+        public Provider(SettingData settingData, InventoryData inventoryData, Plugin plugin) {
             this.settingData = settingData;
-            this.itemDataList = itemDataList;
+            this.itemDataList = inventoryData.getItems();
+            this.decorativeData = inventoryData.getDecorativeData();
             this.plugin = plugin;
         }
 
@@ -61,6 +63,21 @@ public class CategoryInventory {
 
                 } else {
                     contents.set(itemData.getRow(), itemData.getColumn(), ClickableItem.empty(itemStack));
+
+                }
+
+            }
+
+            for (DecorativeData decorative : decorativeData) {
+
+                ItemStack itemStack = decorative.getItem();
+
+                for (Integer slot : decorative.getSlots()) {
+
+                    int row = slot / 9;
+                    int column = slot % 9;
+
+                    contents.set(row, column, ClickableItem.empty(itemStack));
 
                 }
 
