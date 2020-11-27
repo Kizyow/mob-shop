@@ -21,13 +21,13 @@ shop:
       material: hdb-9219
       action: "previous_page"
       slot: 45
-      title: "Page précédente"
+      title: "&fPage précédente"
       lore: [ ]
     arrow_next:
       material: hdb-9217
       action: "next_page"
       slot: 53
-      title: "Page suivante"
+      title: "&fPage suivante"
       lore: [ ]
   decorative:
     white_glass:
