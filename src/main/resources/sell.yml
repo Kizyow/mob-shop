@@ -62,16 +62,16 @@ butchery-and-shop:
 
 # L'inventaire qui correspond à la vente UNIQUEMENT au shop
 shop-only:
-  title: "Sell"
+  title: "Vente"
   size: 27
   items:
     shop:
       material: "<entity_head_shop>"
       action: "sell_shop"
       slot: 13
-      title: "&6Sell <entity_name_shop> to the shop"
+      title: "&6Vendre &e<entity_name_shop> à la boutique"
       lore:
-        - "&8Price: &6$<entity_price_shop>"
+        - "&8Prix: &6<entity_price_shop>$"
   decorative:
     black_glass:
       material: BLACK_STAINED_GLASS_PANE
