@@ -69,7 +69,7 @@ shop-only:
       material: "<entity_head_shop>"
       action: "sell_shop"
       slot: 13
-      title: "&6Vendre &e<entity_name_shop> à la boutique"
+      title: "&6Vendre &e<entity_name_shop> &6à la boutique"
       lore:
         - "&8Prix: &6<entity_price_shop>$"
   decorative:
