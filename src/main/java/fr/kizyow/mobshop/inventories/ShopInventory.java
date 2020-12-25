@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +68,7 @@ public class ShopInventory {
             Pagination pagination = contents.pagination();
             List<ClickableItem> itemList = new ArrayList<>();
 
-            for (Map.Entry<Integer, MobData> entry : shopManager.getMobDataMap().entrySet()) {
+            for (Map.Entry<Integer, MobData> entry : new HashMap<>(shopManager.getMobDataMap()).entrySet()) {
 
                 Integer id = entry.getKey();
                 MobData mobData = entry.getValue();
