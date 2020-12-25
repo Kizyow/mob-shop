@@ -1,6 +1,7 @@
 package fr.kizyow.mobshop.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import fr.kizyow.mobshop.Plugin;
 import fr.kizyow.mobshop.datas.MobData;
@@ -31,7 +32,7 @@ public class JsonData {
             File file = new File(path + "/mobdata.json");
             file.createNewFile();
 
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Writer writer = Files.newBufferedWriter(Paths.get(path + "/mobdata.json"));
 
             gson.toJson(mobDataMap, writer);
@@ -90,7 +91,7 @@ public class JsonData {
             File file = new File(path + "/playerdata.json");
             file.createNewFile();
 
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Writer writer = Files.newBufferedWriter(Paths.get(path + "/playerdata.json"));
 
             gson.toJson(data, writer);
